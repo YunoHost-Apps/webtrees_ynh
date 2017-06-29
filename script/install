@@ -22,7 +22,9 @@ is_public=$YNH_APP_ARG_IS_PUBLIC
 admin_username=$YNH_APP_ARG_USERNAME
 admin_name=$YNH_APP_ARG_NAME
 admin_email=$YNH_APP_ARG_EMAIL
-admin_password=openssl passwd -1 -salt xyz $YNH_APP_ARG_PASSWORD
+password=$YNH_APP_ARG_PASSWORD
+
+admin_password=openssl passwd -1 -salt xyz $password
 
 # Source YunoHost helpers
 source /usr/share/yunohost/helpers
