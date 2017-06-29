@@ -40,7 +40,6 @@
             },
             {
                 "name": "username",
-                "type": "name",
                 "ask": {
                     "en": "Choose an admin username (Not a LDAP User)",
                 },
@@ -48,7 +47,6 @@
             },
             {
                 "name": "name",
-                "type": "name",
                 "ask": {
                     "en": "Name of the user (Not a LDAP User)",
                 },
@@ -56,7 +54,6 @@
             },
             {
                 "name": "email",
-                "type": "name",
                 "ask": {
                     "en": "Admin email (All the new registration will be sent on this email)",
                 },
@@ -75,7 +72,6 @@
                 "type": "boolean",
                 "ask": {
                     "en": "Is it a public application?",
-                    "fr": "Est-ce une application publique ?"
                 },
                 "default": true
             }
