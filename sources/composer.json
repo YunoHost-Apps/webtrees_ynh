@@ -1,0 +1,35 @@
+{
+	"name": "fisharebest/webtrees",
+	"description": "webtrees online genealogy",
+	"keywords": ["webtrees", "genealogy"],
+	"license": "GPL-3.0",
+	"autoload": {
+		"psr-4": {
+			"Fisharebest\\Webtrees\\": "app/"
+		}
+	},
+	"require": {
+		"ezyang/htmlpurifier": "4.*",
+		"fisharebest/algorithm": "1.*",
+		"fisharebest/ext-calendar": "2.*",
+		"fisharebest/localization": "1.*",
+		"fisharebest/php-polyfill": "1.*",
+		"michelf/php-markdown": "1.*",
+		"pclzip/pclzip": "2.*",
+		"rhumsaa/uuid": "2.*",
+		"swiftmailer/swiftmailer": "~5.0",
+		"tecnickcom/tcpdf": "6.*"
+	},
+	"require-dev": {
+		"fabpot/php-cs-fixer": "*",
+		"mockery/mockery": "*",
+		"phpdocumentor/phpdocumentor": "*",
+		"phpunit/phpunit": "*",
+		"satooshi/php-coveralls": "~1.0"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.8-dev"
+		}
+	}
+}
