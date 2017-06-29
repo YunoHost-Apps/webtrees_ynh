@@ -40,7 +40,7 @@
             },
             {
                 "name": "username",
-                "type": "username",
+                "type": "name",
                 "ask": {
                     "en": "Choose an admin username (Not a LDAP User)",
                 },
@@ -56,7 +56,7 @@
             },
             {
                 "name": "email",
-                "type": "email",
+                "type": "name",
                 "ask": {
                     "en": "Admin email (All the new registration will be sent on this email)",
                 },
