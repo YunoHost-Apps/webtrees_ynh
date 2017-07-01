@@ -3,12 +3,12 @@
     "id": "webtrees",
     "packaging_format": 1,
     "description": {
-        "en": "webtrees is a free open source web-based genealogy application.",
+        "en": "webtrees is a free open source web-based genealogy application."
     },
     "url": "https://www.webtrees.net",
     "maintainer": {
         "name": "anmol Sharma",
-        "email": "anmol@datamol.in",
+        "email": "anmol@datamol.in"
     },
     "requirements": {
         "yunohost": ">> 2.4.0"
