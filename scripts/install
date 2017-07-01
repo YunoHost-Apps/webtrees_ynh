@@ -22,9 +22,8 @@ is_public=$YNH_APP_ARG_IS_PUBLIC
 admin_username=$YNH_APP_ARG_USERNAME
 admin_name=$YNH_APP_ARG_NAME
 admin_email=$YNH_APP_ARG_EMAIL
-password=$YNH_APP_ARG_PASSWORD
+admin_password=$(openssl passwd -1 -salt xyz $YNH_APP_ARG_PASSWORD)
 
-admin_password=openssl passwd -1 -salt xyz $password
 
 # Source YunoHost helpers
 source /usr/share/yunohost/helpers
@@ -84,7 +83,7 @@ ynh_replace_string "__NAME__" "$admin_name" ../conf/sql/admin.sql
 ynh_replace_string "__USER_EMAIL__" "$admin_email" ../conf/sql/admin.sql
 ynh_replace_string "__PASSWORD__" "$admin_password" ../conf/sql/admin.sql
 
-ynh_mysql_connect_as $db_name $db_pwd $db_name < ../conf/sql/admin.sql
+ynh_mysql_connect_as "$dbuser" "$dbpass" "$dbname" < "../conf/sql/admin.sql"
 
 ### MySQL end ###
 
