@@ -73,7 +73,7 @@ sudo cp ../conf/config.ini.php $src_path/data/.
 
 # # Load initial SQL into the new database
  ynh_mysql_connect_as "$dbuser" "$dbpass" "$dbname" \
-     < "../sources/sql/webtrees.sql"
+     < "../conf/sql/webtrees.sql"
 
 
 
