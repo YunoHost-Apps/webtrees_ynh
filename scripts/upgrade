@@ -14,8 +14,6 @@ domain=$(ynh_app_setting_get "$app" domain)
 path_url=$(ynh_app_setting_get "$app" path_url)
 is_public=$(ynh_app_setting_get "$app" is_public)
 
-# Remove trailing "/" for next commands
-path_url=${path_url%/}
 
 # Copy source files
 src_path=/var/www/$app
