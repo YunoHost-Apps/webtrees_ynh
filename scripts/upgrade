@@ -15,24 +15,25 @@ path_url=$(ynh_app_setting_get "$app" path)
 is_public=$(ynh_app_setting_get "$app" is_public)
 
 
-# Copy source files
+# Check src_path directory
 src_path=/var/www/$app
-sudo rm -r $src_path
+[[ ! -d $src_path ]] && ynh_die \
+"The destination directory '$DESTDIR' does not exist.\
+ The app is not correctly installed, you should remove it first."
+
+# Move old app dir
+sudo mv ${src_path} ${src_path}.old
+
+# Copy source files
 sudo mkdir -p $src_path
 sudo cp -a ../sources/. $src_path
 
-# Retrieve database settings
-dbuser=$app
-dbname=$app
-dbpass=$(yunohost app setting $YNH_APP_INSTANCE_NAME mysqlpwd)
+# restore data
+sudo cp -a ${src_path}.old/data ${src_path}
 
-# Adding the details of the database to the config file
-sed -i "s@__dbuser__@$dbuser@g" ../conf/config.ini.php
-sed -i "s@__dbpass__@$dbpass@g" ../conf/config.ini.php
-sed -i "s@__dbname__@$dbname@g" ../conf/config.ini.php
+# delete temp directory
+sudo rm -Rf ${src_path}.old
 
-# Copy the config file to the src_path
-sudo cp ../conf/config.ini.php $src_path/data/.
 
 # Set permissions to app files
 # you may need to make some file and/or directory writeable by www-data (nginx user)
