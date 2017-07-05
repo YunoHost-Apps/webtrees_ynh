@@ -13,42 +13,54 @@ set -eu
 # The app instance name is probably what you are interested the most, since this is
 # guaranteed to be unique. This is a good unique identifier to define installation path,
 # db names, ...
+
+source .fonctions # Loads the generic functions usually used in the script
+
+# Source YunoHost helpers
+source /usr/share/yunohost/helpers
+
+TRAP_ON # Active trap for strop script if detect error
+
 app=$YNH_APP_INSTANCE_NAME
 
 # Retrieve arguments
 domain=$YNH_APP_ARG_DOMAIN
-path_url=$YNH_APP_ARG_PATH
+path=$YNH_APP_ARG_PATH
 is_public=$YNH_APP_ARG_IS_PUBLIC
 admin_username=$YNH_APP_ARG_USERNAME
 admin_name=$YNH_APP_ARG_NAME
 admin_email=$YNH_APP_ARG_EMAIL
 admin_password=$(openssl passwd -1 -salt xyz $YNH_APP_ARG_PASSWORD)
 
+CHECK_VAR "$app" "app name not set"
 
-# Source YunoHost helpers
-source /usr/share/yunohost/helpers
+CHECK_PATH
+
+CHECK_DOMAINPATH
+
+CHECK_FINALPATH
+
 
 # Save app settings
 ynh_app_setting_set "$app" is_public "$is_public"
+ynh_app_setting_set $app domain $domain
+ynh_app_setting_set $app path $path
 
-
-# Check domain/path availability
-sudo yunohost app checkurl "${domain}${path_url}" -a "$app" \
-    || ynh_die "Path not available: ${domain}${path_url}"
 
 # Check password strength
 [[ ${#admin_password} -gt 6 ]] || ynh_die \
 "The password is too weak, it must be longer than 6 characters"
 
 
-# Copy source files
-src_path=/var/www/$app
-sudo mkdir -p $src_path
-sudo cp -a ../sources/. $src_path
+# Copy files to the right place
+sudo mkdir "$final_path"
+ynh_app_setting_set $app final_path $final_path
+# Get source
+SETUP_SOURCE
 
 # Set permissions to app files
 # you may need to make some file and/or directory writeable by www-data (nginx user)
-sudo chown -R root: $src_path
+sudo chown -R root: $final_path
 
 ### MySQL (can be removed if not used) ###
 # If your app use a MySQL database you can use these lines to bootstrap
@@ -66,8 +78,8 @@ sed -i "s@__dbuser__@$dbuser@g" ../conf/config.ini.php
 sed -i "s@__dbpass__@$dbpass@g" ../conf/config.ini.php
 sed -i "s@__dbname__@$dbname@g" ../conf/config.ini.php
 
-# Copy the config file to the src_path
-sudo cp ../conf/config.ini.php $src_path/data/.
+# Copy the config file to the final path
+sudo cp ../conf/config.ini.php $final_path/data/.
 
 
 
@@ -89,8 +101,8 @@ ynh_mysql_connect_as "$dbuser" "$dbpass" "$dbname" < "../conf/sql/admin.sql"
 
 # Modify Nginx configuration file and copy it to Nginx conf directory
 nginx_conf=../conf/nginx.conf
-sed -i "s@YNH_WWW_PATH@$path_url@g" $nginx_conf
-sed -i "s@YNH_WWW_ALIAS@$src_path/@g" $nginx_conf
+sed -i "s@YNH_WWW_PATH@$path@g" $nginx_conf
+sed -i "s@YNH_WWW_ALIAS@$final_path/@g" $nginx_conf
 # If a dedicated php-fpm process is used:
 # Don't forget to modify ../conf/nginx.conf accordingly or your app will not work!
 # sed -i "s@YNH_WWW_APP@$app@g" $nginx_conf
@@ -103,7 +115,7 @@ if [[ $is_public -eq 1 ]]; then
   ynh_app_setting_set "$app" unprotected_uris "/"
 fi
 
-sudo chmod -R 777 $src_path/data
+sudo chmod -R 777 $final_path/data
 
 # Reload services
 sudo service nginx reload

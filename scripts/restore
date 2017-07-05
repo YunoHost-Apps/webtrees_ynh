@@ -6,7 +6,7 @@
 # Exit on command errors and treat unset variables as an error
 set -eu
 
-# See comments in install script
+# See comsudo yunohost app ssowatconfments in install script
 app=$YNH_APP_INSTANCE_NAME
 
 # Source YunoHost helpers
@@ -14,19 +14,24 @@ source /usr/share/yunohost/helpers
 
 # Retrieve old app settings
 domain=$(ynh_app_setting_get "$app" domain)
-path_url=$(ynh_app_setting_get "$app" path_url)
+path=$(ynh_app_setting_get "$app" path_url)
+is_public=$(ynh_app_setting_get "$app" is_public)
 
 # Check domain/path availability
-sudo yunohost app checkurl "${domain}${path_url}" -a "$app" \
-    || ynh_die "Path not available: ${domain}${path_url}"
+sudo yunohost app checkurl "${domain}${path}" -a "$app" \
+    || ynh_die "Path not available: ${domain}${path}"
 
 # Restore sources & data
-src_path="/var/www/${app}"
-sudo cp -a ./sources "$src_path"
+final_path="/var/www/${app}"
+if [ -d $final_path ]; then
+	ynh_die "There is already a directory: $final_path"
+fi
+
+sudo cp -a ./sources "${final_path}"
 
 # Restore permissions to app files
 # you may need to make some file and/or directory writeable by www-data (nginx user)
-sudo chown -R root: "$src_path"
+sudo chown -R root: "${final_path}"
 
 ### MySQL (remove if not used) ###
 # If a MySQL database is used:
@@ -38,8 +43,14 @@ ynh_mysql_create_db "$dbname" "$dbuser" "$dbpass"
 ynh_mysql_connect_as "$dbuser" "$dbpass" "$dbname" < ./dump.sql
 ### MySQL end ###
 
+# Check configuration files nginx
+nginx_conf="/etc/nginx/conf.d/${domain}.d/${app}.conf"
+if [ -f $nginx_conf ]; then
+	ynh_die "The NGINX configuration already exists at '${nginx_conf}'. You should safely delete it before restoring this app."
+fi
+
 # Restore NGINX configuration
-sudo cp -a ./nginx.conf "/etc/nginx/conf.d/${domain}.d/${app}.conf"
+sudo cp -a ./nginx.conf "${nginx_conf}"
 
 ### PHP (remove if not used) ###
 # If a dedicated php-fpm process is used:
@@ -48,7 +59,13 @@ sudo cp -a ./nginx.conf "/etc/nginx/conf.d/${domain}.d/${app}.conf"
 # sudo service php5-fpm reload
 ### PHP end ###
 
-sudo chmod -R 777 $src_path/data
+# If app is public, add url to SSOWat conf as skipped_uris
+if [[ $is_public -eq 1 ]]; then
+  # See install script
+  ynh_app_setting_set "$app" unprotected_uris "/"
+fi
+
+sudo chmod -R 777 $final_path/data
 
 # Restart webserver
 sudo service nginx reload

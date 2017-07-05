@@ -1,5 +1,5 @@
 {
-    "name": "webtrees",
+    "name": "Webtrees",
     "id": "webtrees",
     "packaging_format": 1,
     "description": {
@@ -13,12 +13,13 @@
     "requirements": {
         "yunohost": ">> 2.4.0"
     },
-    "multi_instance": false,
+    "multi_instance": true,
     "services": [
         "nginx",
         "php5-fpm",
         "mysql"
     ],
+    "license": "free",
     "arguments": {
         "install" : [
             {

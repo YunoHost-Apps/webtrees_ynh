@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# Exit on command errors and treat unset variables as an error
+set -u
+
 # See comments in install script
 app=$YNH_APP_INSTANCE_NAME
+
 
 # Source YunoHost helpers
 source /usr/share/yunohost/helpers
@@ -13,7 +17,7 @@ domain=$(ynh_app_setting_get "$app" domain)
 sudo rm -rf /var/www/$app
 
 # Remove nginx configuration file
-sudo rm -f /etc/nginx/conf.d/$domain.d/$app.conf
+[[ -n $domain ]] && sudo rm -f "/etc/nginx/conf.d/${domain}.d/${app}.conf"
 
 ### PHP (remove if not used) ###
 # If a dedicated php-fpm process is used:
@@ -32,3 +36,4 @@ ynh_mysql_drop_user "$dbuser" || true
 
 # Reload nginx service
 sudo service nginx reload
+echo -e "\e[0m"	# Restore normal color
