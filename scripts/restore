@@ -14,7 +14,7 @@ source /usr/share/yunohost/helpers
 
 # Retrieve old app settings
 domain=$(ynh_app_setting_get "$app" domain)
-path=$(ynh_app_setting_get "$app" path_url)
+path=$(ynh_app_setting_get "$app" path)
 is_public=$(ynh_app_setting_get "$app" is_public)
 
 # Check domain/path availability
