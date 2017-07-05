@@ -5,6 +5,7 @@
 		path="/path"	(PATH)
 		admin="john"	(USER)
 		language="fr"
+		username="username"
 #		is_public="Yes"	(PUBLIC|public=Yes|private=No)
 		is_public=1	(PUBLIC|public=1|private=0)
 		password="password"
