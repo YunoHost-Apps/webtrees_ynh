@@ -3,11 +3,12 @@
     "id": "webtrees",
     "packaging_format": 1,
     "description": {
-        "en": "webtrees is a free open source web-based genealogy application."
+        "en": "Webtrees is a free open source web-based genealogy application."
     },
     "url": "https://www.webtrees.net",
+    "license": "free",
     "maintainer": {
-        "name": "anmol Sharma",
+        "name": "Anmol Sharma",
         "email": "anmol@datamol.in"
     },
     "requirements": {
