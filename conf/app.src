@@ -1,0 +1,6 @@
+SOURCE_URL=https://launchpad.net/webtrees/1.7/1.7.9/+download/webtrees-1.7.9.zip
+SOURCE_SUM=0f51ab5af9414b981ade19b582a7dd06
+SOURCE_SUM_PRG=md5sum
+SOURCE_FORMAT=zip
+SOURCE_IN_SUBDIR=true
+SOURCE_FILENAME=
