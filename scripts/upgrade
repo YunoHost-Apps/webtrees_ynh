@@ -1,35 +1,55 @@
 #!/bin/bash
 
-# Exit on command errors and treat unset variables as an error
-set -eu
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
-source .fonctions
+source _common.sh
+source /usr/share/yunohost/helpers
 
+#=================================================
+# LOAD SETTINGS
+#=================================================
 # See comments in install script
 app=$YNH_APP_INSTANCE_NAME
 
-# Source YunoHost helpers
-source /usr/share/yunohost/helpers
 
 # Retrieve app settings
 domain=$(ynh_app_setting_get "$app" domain)
-path=$(ynh_app_setting_get "$app" path)
+path_url=$(ynh_app_setting_get "$app" path)
 is_public=$(ynh_app_setting_get "$app" is_public)
 
+#=================================================
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
 
-# Check final_path directory
-final_path=/var/www/$app
-[[ ! -d $final_path ]] && ynh_die \
-"The destination directory '$final_path' does not exist.\
- The app is not correctly installed, you should remove it first."
+if [ "$is_public" = "Yes" ]; then
+	ynh_app_setting_set $app is_public 1	# Fix is_public as a boolean value
+	is_public=1
+elif [ "$is_public" = "No" ]; then
+	ynh_app_setting_set $app is_public 0
+	is_public=0
+fi
+
+if [ -z $db_name ]; then	# If db_name doesn't exist, create it
+	db_name=$(ynh_sanitize_dbid $app)
+	ynh_app_setting_set $app db_name $db_name
+fi
+
+#=================================================
+# CHECK THE PATH
+#=================================================
+
+# Normalize the URL path syntax
+path_url=$(ynh_normalize_url_path $path_url)
 
 # Move old app dir
 sudo mv ${final_path} ${final_path}.old
 
-# Copy source files
-sudo mkdir -p $final_path
-# Get source
-SETUP_SOURCE
+# Download, check integrity, uncompress and patch the source from app.src
+ynh_setup_source "$final_path"
 
 # restore data
 sudo cp -a ${final_path}.old/data ${final_path}
@@ -42,14 +62,9 @@ sudo rm -Rf ${final_path}.old
 # you may need to make some file and/or directory writeable by www-data (nginx user)
 sudo chown -R root: $final_path
 
-# Modify Nginx configuration file and copy it to Nginx conf directory
-nginx_conf=../conf/nginx.conf
-sed -i "s@YNH_WWW_PATH@$path@g" $nginx_conf
-sed -i "s@YNH_WWW_ALIAS@$final_path/@g" $nginx_conf
-# If a dedicated php-fpm process is used:
-#
-# sed -i "s@YNH_WWW_APP@$app@g" $nginx_conf
-sudo cp $nginx_conf /etc/nginx/conf.d/$domain.d/$app.conf
+# Create a dedicated nginx config
+ynh_add_nginx_config
+
 
 ### PHP (remove if not used) ###
 # If a dedicated php-fpm process is used:
@@ -63,12 +78,25 @@ sudo cp $nginx_conf /etc/nginx/conf.d/$domain.d/$app.conf
 # sudo service php5-fpm restart
 ### PHP end ###
 
-# If app is public, add url to SSOWat conf as skipped_uris
-if [[ $is_public -eq 1 ]]; then
-  # See install script
-  ynh_app_setting_set "$app" unprotected_uris "/"
+#=================================================
+# SETUP SSOWAT
+#=================================================
+
+if [ $is_public -eq 0 ]
+then	# Remove the public access
+	ynh_app_setting_delete $app skipped_uris
+fi
+# Make app public if necessary
+if [ $is_public -eq 1 ]
+then
+	# unprotected_uris allows SSO credentials to be passed anyway
+	ynh_app_setting_set $app unprotected_uris "/"
 fi
 
+
 sudo chmod -R 777 $final_path/data
-# Reload nginx service
-sudo service nginx reload
+#=================================================
+# RELOAD NGINX
+#=================================================
+
+systemctl reload nginx

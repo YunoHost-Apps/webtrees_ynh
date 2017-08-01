@@ -1,57 +1,71 @@
 #!/bin/bash
 
-# Note: each files and directories you've saved using the ynh_backup helper
-# will be located in the current directory, regarding the last argument.
+#=================================================
+# GENERIC START
+#=================================================
+# MANAGE SCRIPT FAILURE
+#=================================================
 
-# Exit on command errors and treat unset variables as an error
+# Exit on command errors and treat access to unset variables as an error
 set -eu
+
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
+if [ ! -e _common.sh ]; then
+	# Get the _common.sh file if it's not in the current directory
+	cp ../settings/scripts/_common.sh ./_common.sh
+	chmod a+rx _common.sh
+fi
+source _common.sh
+source /usr/share/yunohost/helpers
 
 # See comsudo yunohost app ssowatconfments in install script
 app=$YNH_APP_INSTANCE_NAME
 
-# Source YunoHost helpers
-source /usr/share/yunohost/helpers
 
 # Retrieve old app settings
 domain=$(ynh_app_setting_get "$app" domain)
-path=$(ynh_app_setting_get "$app" path)
-is_public=$(ynh_app_setting_get "$app" is_public)
+path_url=$(ynh_app_setting_get "$app" path)
+final_path=$(ynh_app_setting_get $app final_path)
+db_name=$(ynh_app_setting_get $app db_name)
 
-# Check domain/path availability
-sudo yunohost app checkurl "${domain}${path}" -a "$app" \
-    || ynh_die "Path not available: ${domain}${path}"
+#=================================================
+# CHECK IF THE APP CAN BE RESTORED
+#=================================================
 
-# Restore sources & data
-final_path="/var/www/${app}"
-if [ -d $final_path ]; then
-	ynh_die "There is already a directory: $final_path"
-fi
+yunohost app checkurl "${domain}${path_url}" -a "$app" \
+	|| ynh_die "Path not available: ${domain}${path_url}"
+test ! -d $final_path \
+	|| ynh_die "There is already a directory: $final_path "
 
-sudo cp -a ./sources "${final_path}"
+  #=================================================
+  # STANDARD RESTORATION STEPS
+  #=================================================
+  # RESTORE THE NGINX CONFIGURATION
+  #=================================================
+
+  ynh_restore_file "/etc/nginx/conf.d/$domain.d/$app.conf"
+
+  #=================================================
+  # RESTORE THE APP MAIN DIR
+  #=================================================
+
+  ynh_restore_file "$final_path"
 
 # Restore permissions to app files
 # you may need to make some file and/or directory writeable by www-data (nginx user)
 sudo chown -R root: "${final_path}"
 
-### MySQL (remove if not used) ###
-# If a MySQL database is used:
-# # Create and restore the database
-dbname=$app
-dbuser=$app
-dbpass=$(ynh_app_setting_get "$app" mysqlpwd)
-ynh_mysql_create_db "$dbname" "$dbuser" "$dbpass"
-ynh_mysql_connect_as "$dbuser" "$dbpass" "$dbname" < ./dump.sql
-### MySQL end ###
 
-# Check configuration files nginx
-nginx_conf="/etc/nginx/conf.d/${domain}.d/${app}.conf"
-if [ -f $nginx_conf ]; then
-	ynh_die "The NGINX configuration already exists at '${nginx_conf}'. You should safely delete it before restoring this app."
-fi
+#=================================================
+# RESTORE THE MYSQL DATABASE
+#=================================================
 
-# Restore NGINX configuration
-sudo cp -a ./nginx.conf "${nginx_conf}"
-
+db_pwd=$(ynh_app_setting_get $app mysqlpwd)
+ynh_mysql_setup_db $db_name $db_name $db_pwd
+ynh_mysql_connect_as $db_name $db_pwd $db_name < ./db.sql
 ### PHP (remove if not used) ###
 # If a dedicated php-fpm process is used:
 # # Copy PHP-FPM pool configuration and reload the service
@@ -59,13 +73,9 @@ sudo cp -a ./nginx.conf "${nginx_conf}"
 # sudo service php5-fpm reload
 ### PHP end ###
 
-# If app is public, add url to SSOWat conf as skipped_uris
-if [[ $is_public -eq 1 ]]; then
-  # See install script
-  ynh_app_setting_set "$app" unprotected_uris "/"
-fi
 
 sudo chmod -R 777 $final_path/data
 
 # Restart webserver
+systemctl reload php5-fpm
 sudo service nginx reload
