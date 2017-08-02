@@ -21,6 +21,7 @@ domain=$(ynh_app_setting_get "$app" domain)
 path_url=$(ynh_app_setting_get "$app" path)
 is_public=$(ynh_app_setting_get "$app" is_public)
 
+
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
@@ -44,6 +45,9 @@ fi
 
 # Normalize the URL path syntax
 path_url=$(ynh_normalize_url_path $path_url)
+
+final_path=/var/www/$app
+test ! -e "$final_path" || ynh_die "This path already contains a folder"
 
 # Move old app dir
 sudo mv ${final_path} ${final_path}.old
