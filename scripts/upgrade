@@ -47,7 +47,6 @@ fi
 path_url=$(ynh_normalize_url_path $path_url)
 
 final_path=/var/www/$app
-test ! -e "$final_path" || ynh_die "This path already contains a folder"
 
 # Move old app dir
 sudo mv ${final_path} ${final_path}.old
