@@ -5,14 +5,15 @@
     "description": {
         "en": "Webtrees is a free open source web-based genealogy application."
     },
+    "version":"1.7.10",
     "url": "https://www.webtrees.net",
     "license": "free",
     "maintainer": {
         "name": "Anmol Sharma",
-        "email": "anmol@datamol.in"
+        "email": "anmol@datamol.org"
     },
     "requirements": {
-        "yunohost": ">> 2.4.0"
+        "yunohost": ">> 2.7.14"
     },
     "multi_instance": true,
     "services": [
@@ -20,7 +21,6 @@
         "php5-fpm",
         "mysql"
     ],
-    "license": "free",
     "arguments": {
         "install" : [
             {
