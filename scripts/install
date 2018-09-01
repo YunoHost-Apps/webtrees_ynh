@@ -101,9 +101,9 @@ ynh_app_setting_set $app db_name $db_name
 ynh_mysql_setup_db $db_name $db_name
 
 # Adding the details of the database to the config file
-ynh_replace_string "__dbuser__" "$db_name@g"  "../conf/config.ini.php"
-ynh_replace_string "__dbpass__" "$db_pwd@g"   "../conf/config.ini.php"
-ynh_replace_string "__dbname__" "$db_name@g"  "../conf/config.ini.php"
+ynh_replace_string "__dbuser__" "$db_name"  "../conf/config.ini.php"
+ynh_replace_string "__dbpass__" "$db_pwd"   "../conf/config.ini.php"
+ynh_replace_string "__dbname__" "$db_name"  "../conf/config.ini.php"
 
 # Copy the config file to the final path
 sudo cp ../conf/config.ini.php $final_path/data/.
