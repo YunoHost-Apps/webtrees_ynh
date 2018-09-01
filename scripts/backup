@@ -3,26 +3,27 @@
 #=================================================
 # GENERIC START
 #=================================================
-# MANAGE SCRIPT FAILURE
-#=================================================
-
-# Exit on command errors and treat access to unset variables as an error
-set -eu
-
-
-#=================================================
 # IMPORT GENERIC HELPERS
 #=================================================
 
-if [ ! -e _common.sh ]; then
-	# Get the _common.sh file if it's not in the current directory
-	cp ../settings/scripts/_common.sh ./_common.sh
-	chmod a+rx _common.sh
-fi
-source _common.sh
+source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
-# See comments in install script
+#=================================================
+# MANAGE SCRIPT FAILURE
+#=================================================
+
+ynh_clean_setup () {
+	### Remove this function if there's nothing to clean before calling the remove script.
+	true
+}
+# Exit if an error occurs during the execution of the script
+ynh_abort_if_errors
+
+#=================================================
+# LOAD SETTINGS
+#=================================================
+
 app=$YNH_APP_INSTANCE_NAME
 
 final_path=$(ynh_app_setting_get $app final_path)
@@ -36,13 +37,20 @@ db_pwd=$(ynh_app_setting_get $app mysqlpwd)
 # BACKUP THE APP MAIN DIR
 #=================================================
 
-ynh_backup "$final_path" "$final_path"
+ynh_backup "$final_path" 
 
 #=================================================
 # BACKUP THE NGINX CONFIGURATION
 #=================================================
 
-ynh_backup "/etc/nginx/conf.d/$domain.d/$app.conf" "/etc/nginx/conf.d/$domain.d/$app.conf"
+ynh_backup "/etc/nginx/conf.d/$domain.d/$app.conf" 
+
+#=================================================
+# BACKUP THE PHP-FPM CONFIGURATION
+#=================================================
+
+ynh_backup "/etc/php5/fpm/pool.d/$app.conf"
+ynh_backup "/etc/php5/fpm/conf.d/20-$app.ini"
 
 #=================================================
 # BACKUP THE MYSQL DATABASE
@@ -50,9 +58,3 @@ ynh_backup "/etc/nginx/conf.d/$domain.d/$app.conf" "/etc/nginx/conf.d/$domain.d/
 
 ynh_mysql_dump_db "$db_name" > db.sql
 
-
-### PHP (remove if not used) ###
-# If a dedicated php-fpm process is used:
-# # Copy PHP-FPM pool configuration
-# ynh_backup "/etc/php5/fpm/pool.d/${app}.conf" "php-fpm.conf"
-### PHP end ###

@@ -62,14 +62,6 @@
                 "example": "admin@example.com"
             },
             {
-                "name": "password",
-                "type": "password",
-                "ask": {
-                    "en": "Password for the admin account (At least 6 characters long)"
-                },
-                "example": "admin@example.com"
-            },
-            {
                 "name": "is_public",
                 "type": "boolean",
                 "ask": {

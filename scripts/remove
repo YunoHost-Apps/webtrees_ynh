@@ -12,15 +12,21 @@ source /usr/share/yunohost/helpers
 #=================================================
 # LOAD SETTINGS
 #=================================================
+
 app=$YNH_APP_INSTANCE_NAME
 
 # Retrieve app settings
 domain=$(ynh_app_setting_get "$app" domain)
 db_name=$(ynh_app_setting_get $app db_name)
+db_user=$db_name
+final_path=$(ynh_app_setting_get $app final_path)
 
+#=================================================
+# REMOVE APP MAIN DIR
+#=================================================
 
 # Remove the app directory securely
-ynh_secure_remove "/var/www/$app"
+ynh_secure_remove "$final_path"
 
 #=================================================
 # REMOVE NGINX CONFIGURATION
@@ -29,12 +35,16 @@ ynh_secure_remove "/var/www/$app"
 # Remove the dedicated nginx config
 ynh_remove_nginx_config
 
+#=================================================
+# REMOVE PHP-FPM CONFIGURATION
+#=================================================
 
-### PHP (remove if not used) ###
-# If a dedicated php-fpm process is used:
-# sudo rm -f /etc/php5/fpm/pool.d/$app.conf
-# sudo service php5-fpm reload
-### PHP end ###
+# Remove the dedicated php-fpm config
+ynh_remove_fpm_config
+
+#=================================================
+# REMOVE THE MYSQL DATABASE
+#=================================================
 
 # Remove a database if it exists, along with the associated user
-ynh_mysql_remove_db $db_name $db_name
+ynh_mysql_remove_db $db_user $db_name
