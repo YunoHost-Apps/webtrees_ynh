@@ -3,7 +3,8 @@
     "id": "webtrees",
     "packaging_format": 1,
     "description": {
-        "en": "Webtrees is a free open source web-based genealogy application."
+        "en": "Webtrees is a free open source web-based genealogy application.",
+        "fr": "Webtrees est un logiciel libre de généalogie en ligne."
     },
     "version":"1.7.10",
     "url": "https://www.webtrees.net",
@@ -27,7 +28,8 @@
                 "name": "domain",
                 "type": "domain",
                 "ask": {
-                    "en": "Choose a domain name for ynhexample"
+                    "en": "Choose a domain name for Webtrees",
+                    "fr": "Choisissez un domaine pour Webtrees"
                 },
                 "example": "example.com"
             },
@@ -35,7 +37,8 @@
                 "name": "path",
                 "type": "path",
                 "ask": {
-                    "en": "Choose a path for ynhexample"
+                    "en": "Choose a path for Webtrees",
+                    "fr": "Choisissez un chemin pour Webtrees"
                 },
                 "example": "/example",
                 "default": "/webtrees"
@@ -43,21 +46,24 @@
             {
                 "name": "username",
                 "ask": {
-                    "en": "Choose an admin username (Not a LDAP User)"
+                    "en": "Choose an admin username (Not a LDAP User)",
+                    "fr": "Choisissez un nom d'utilisateur pour l'administrateur de Webtrees (ne doit pas être un utilisateur YunoHost existant)"
                 },
                 "example": "john"
             },
             {
                 "name": "name",
                 "ask": {
-                    "en": "Name of the user (Not a LDAP User)"
+                    "en": "Name of the user (Not a LDAP User)",
+                    "fr": "Nom de cet utilisateur"
                 },
                 "example": "john doe"
             },
             {
                 "name": "email",
                 "ask": {
-                    "en": "Admin email (All the new registration will be sent on this email)"
+                    "en": "Admin email (All the new registration will be sent on this email)",
+                    "fr": "Adresse email de l'administrateur (Toutes les nouvelles inscriptions seront envoyées à cette adresse)"
                 },
                 "example": "admin@example.com"
             },
@@ -65,7 +71,8 @@
                 "name": "is_public",
                 "type": "boolean",
                 "ask": {
-                    "en": "Is it a public application?"
+                    "en": "Is it a public application?",
+                    "fr": "Est-ce une application publique ?"
                 },
                 "default": true
             }
