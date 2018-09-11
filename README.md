@@ -4,7 +4,7 @@
 Leading on-line collaborative genealogy application https://www.webtrees.net<br>
 version: **1.7.11**,released **11 Sept 2018**<br>,<br>
 
-**Note: Its better to upgrade from the Webtrees new version arrives.** <br><br>
+**Note: Its better to upgrade from the Webtrees admin pannel when new version arrives.** <br><br>
 
 <b>Demo:</b>https://dev.webtrees.net/demo-dev/index.php?ctype=gedcom&ged=demo<br>
 <br>
