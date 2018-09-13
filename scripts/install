@@ -83,6 +83,9 @@ ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source "$final_path"
 
+# install dependencies
+ynh_install_app_dependencies php_gd php-xml mailutils 
+
 #=================================================
 # CREATE A MYSQL DATABASE
 #=================================================
@@ -158,7 +161,7 @@ ynh_add_fpm_config
 #=================================================
 
 chown -R $app: $final_path
-sudo chmod -R 777 $final_path/data
+sudo chmod -R 700 $final_path/data
 
 #=================================================
 # SETUP SSOWAT

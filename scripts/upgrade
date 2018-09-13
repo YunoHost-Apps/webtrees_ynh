@@ -82,6 +82,9 @@ sudo rm -Rf ${final_path}.old
 # Create a dedicated nginx config
 ynh_add_nginx_config
 
+# install dependencies
+ynh_install_app_dependencies php_gd php-xml mailutils 
+
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
@@ -104,7 +107,7 @@ ynh_add_fpm_config
 
 # Set permissions on app files
 chown -R $app: $final_path
-sudo chmod -R 777 $final_path/data
+sudo chmod -R 700 $final_path/data
 
 #=================================================
 # SETUP SSOWAT

@@ -62,6 +62,9 @@ ynh_restore_file "$final_path"
 # Create the dedicated user (if not existing)
 ynh_system_user_create $app
 
+# install dependencies
+ynh_install_app_dependencies php_gd php-xml mailutils 
+
 #=================================================
 # RESTORE USER RIGHTS
 #=================================================
@@ -69,7 +72,7 @@ ynh_system_user_create $app
 # Restore permissions to app files
 
 sudo chown -R $app: "${final_path}"
-sudo chmod -R 777 $final_path/data
+sudo chmod -R 700 $final_path/data
 
 #=================================================
 # RESTORE THE MYSQL DATABASE
