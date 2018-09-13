@@ -63,7 +63,7 @@ ynh_restore_file "$final_path"
 ynh_system_user_create $app
 
 # install dependencies
-ynh_install_app_dependencies php_gd php-xml mailutils 
+ynh_install_app_dependencies php-gd php-xml mailutils 
 
 #=================================================
 # RESTORE USER RIGHTS

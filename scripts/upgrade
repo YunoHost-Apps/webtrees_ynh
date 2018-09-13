@@ -83,7 +83,7 @@ sudo rm -Rf ${final_path}.old
 ynh_add_nginx_config
 
 # install dependencies
-ynh_install_app_dependencies php_gd php-xml mailutils 
+ynh_install_app_dependencies php-gd php-xml mailutils 
 
 #=================================================
 # CREATE DEDICATED USER
