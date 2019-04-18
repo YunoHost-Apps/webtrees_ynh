@@ -67,8 +67,9 @@ ynh_system_user_create $app
 # RESTORE USER RIGHTS
 #=================================================
 
-# Restore permissions on app files
-chown -R $app: $final_path
+# Restore permissions to app files
+sudo chown -R $app: "${final_path}"
+sudo chmod -R 700 $final_path/data
 
 #=================================================
 # RESTORE THE PHP-FPM CONFIGURATION
@@ -85,15 +86,6 @@ ynh_print_info "Reinstalling dependencies..."
 
 # Define and install dependencies
 ynh_install_app_dependencies $pkg_dependencies
-
-#=================================================
-# RESTORE USER RIGHTS
-#=================================================
-
-# Restore permissions to app files
-
-sudo chown -R $app: "${final_path}"
-sudo chmod -R 700 $final_path/data
 
 #=================================================
 # RESTORE THE MYSQL DATABASE
