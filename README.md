@@ -40,7 +40,6 @@ Multi-instance: **yes**
 * ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/webtrees%20%28Community%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/webtrees/)
 * Jessie x86-64b - [![Build Status](https://ci-stretch.nohost.me/ci/logs/webtrees%20%28Community%29.svg)](https://ci-stretch.nohost.me/ci/apps/webtrees/)
 
-
 ## Links
 
  * Report a bug: https://github.com/YunoHost-Apps/webtrees_ynh/issues
