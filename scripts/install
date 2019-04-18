@@ -86,29 +86,6 @@ ynh_print_info "Configuring nginx web server..."
 ynh_add_nginx_config
 
 #=================================================
-# MODIFY A CONFIG FILE
-#=================================================
-
-# Adding the details of the database to the config file
-ynh_replace_string "__dbuser__" "$db_name"  "../conf/config.ini.php"
-ynh_replace_string "__dbpass__" "$db_pwd"   "../conf/config.ini.php"
-ynh_replace_string "__dbname__" "$db_name"  "../conf/config.ini.php"
-
-# Copy the config file to the final path
-sudo cp ../conf/config.ini.php $final_path/data/.
-
-# Load initial SQL into the new database
-ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/webtrees.sql"
-
-# Replace variables in sql scripts
-ynh_replace_string "__USER_NAME__"  "$admin_username" "../conf/sql/admin.sql"
-ynh_replace_string "__NAME__"       "$admin_name"     "../conf/sql/admin.sql"
-ynh_replace_string "__USER_EMAIL__" "$admin_email"    "../conf/sql/admin.sql"
-ynh_replace_string "__PASSWORD__"   "$admin_password" "../conf/sql/admin.sql"
-
-ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/admin.sql"
-
-#=================================================
 # CREATE DEDICATED USER
 #=================================================
 ynh_print_info "Configuring system user..."
@@ -130,6 +107,29 @@ ynh_add_fpm_config
 
 chown -R $app: $final_path
 sudo chmod -R 700 $final_path/data
+
+#=================================================
+# MODIFY A CONFIG FILE
+#=================================================
+
+# Adding the details of the database to the config file
+ynh_replace_string "__dbuser__" "$db_name"  "../conf/config.ini.php"
+ynh_replace_string "__dbpass__" "$db_pwd"   "../conf/config.ini.php"
+ynh_replace_string "__dbname__" "$db_name"  "../conf/config.ini.php"
+
+# Copy the config file to the final path
+sudo cp ../conf/config.ini.php $final_path/data/.
+
+# Load initial SQL into the new database
+ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/webtrees.sql"
+
+# Replace variables in sql scripts
+ynh_replace_string "__USER_NAME__"  "$admin_username" "../conf/sql/admin.sql"
+ynh_replace_string "__NAME__"       "$admin_name"     "../conf/sql/admin.sql"
+ynh_replace_string "__USER_EMAIL__" "$admin_email"    "../conf/sql/admin.sql"
+ynh_replace_string "__PASSWORD__"   "$admin_password" "../conf/sql/admin.sql"
+
+ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/admin.sql"
 
 #=================================================
 # STORE THE CONFIG FILE CHECKSUM
