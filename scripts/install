@@ -102,13 +102,6 @@ ynh_print_info "Configuring php-fpm..."
 ynh_add_fpm_config
 
 #=================================================
-# SET RIGHT PERMISSION FOR APP
-#=================================================
-
-chown -R $app: $final_path
-sudo chmod -R 700 $final_path/data
-
-#=================================================
 # MODIFY A CONFIG FILE
 #=================================================
 
@@ -137,6 +130,13 @@ ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/admin.sql"
 
 # Calculate and store the config file checksum into the app settings
 ynh_store_file_checksum "$final_path/data/config.ini.php"
+
+#=================================================
+# SET RIGHT PERMISSION FOR APP
+#=================================================
+
+chown -R $app: $final_path
+sudo chmod -R 700 $final_path/data
 
 #=================================================
 # SETUP SSOWAT
