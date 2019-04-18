@@ -132,9 +132,12 @@ ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/admin.sql"
 ynh_store_file_checksum "$final_path/data/config.ini.php"
 
 #=================================================
-# SET RIGHT PERMISSION FOR APP
+# GENERIC FINALIZATION
+#=================================================
+# SECURE FILES AND DIRECTORIES
 #=================================================
 
+# Set permissions to app files
 chown -R $app: $final_path
 sudo chmod -R 700 $final_path/data
 
