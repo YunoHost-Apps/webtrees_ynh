@@ -160,7 +160,6 @@ ynh_print_info "Reloading nginx web server..."
 
 systemctl reload nginx
 
-
 #=================================================
 # SEND A README FOR THE ADMIN
 #=================================================
@@ -176,10 +175,8 @@ If you facing an issue or want to improve this app, please open a new issue in t
 
 ynh_send_readme_to_admin "$message"
 
-
 #=================================================
 # END OF SCRIPT
 #=================================================
 
 ynh_print_info "Installation of $app completed"
-
