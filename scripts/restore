@@ -64,6 +64,13 @@ ynh_print_info "Recreating the dedicated system user..."
 ynh_system_user_create $app
 
 #=================================================
+# RESTORE USER RIGHTS
+#=================================================
+
+# Restore permissions on app files
+chown -R $app: $final_path
+
+#=================================================
 # RESTORE THE PHP-FPM CONFIGURATION
 #=================================================
 
