@@ -1,5 +1,12 @@
 #!/bin/bash
 
+#=================================================
+# COMMON VARIABLES
+#=================================================
+
+# dependencies used by the app
+pkg_dependencies="php-gd php-xml mailutils "
+
 # ============= FUTURE YUNOHOST HELPER =============
 # Delete a file checksum from the app settings
 #
@@ -12,12 +19,6 @@ ynh_delete_file_checksum () {
 	ynh_app_setting_delete $app $checksum_setting_name
 }
 
-#=================================================
-# COMMON VARIABLES
-#=================================================
-
-# dependencies used by the app
-pkg_dependencies="php-gd php-xml mailutils "
 
 # Send an email to inform the administrator
 #
