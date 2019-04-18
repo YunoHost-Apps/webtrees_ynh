@@ -5,7 +5,7 @@
 #=================================================
 
 # dependencies used by the app
-pkg_dependencies="php-gd php-xml mailutils "
+pkg_dependencies="php-gd php-xml mailutils"
 
 #=================================================
 # PERSONAL HELPERS
