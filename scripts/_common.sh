@@ -7,7 +7,18 @@
 # dependencies used by the app
 pkg_dependencies="php-gd php-xml mailutils "
 
-# ============= FUTURE YUNOHOST HELPER =============
+#=================================================
+# PERSONAL HELPERS
+#=================================================
+
+#=================================================
+# EXPERIMENTAL HELPERS
+#=================================================
+
+#=================================================
+# FUTURE OFFICIAL HELPERS
+#=================================================
+
 # Delete a file checksum from the app settings
 #
 # $app should be defined when calling this helper
