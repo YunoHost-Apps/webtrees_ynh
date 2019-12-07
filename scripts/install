@@ -232,14 +232,7 @@ systemctl reload nginx
 # SEND A README FOR THE ADMIN
 #=================================================
 
-message=" $app was successfully installed :)
-
-Please open https://$domain$path_url
-
-The admin username is: $admin_username
-And the admin password is: $password
-
-If you facing an issue or want to improve this app, please open a new issue in this project: https://github.com/YunoHost-Apps/Webtrees_ynh"
+message=" $app was successfully installed :) \n Please open https://$domain$path_url \n The admin username is: $admin_username \n And the admin password is: $password \n If you facing an issue or want to improve this app, please open a new issue in this project: https://github.com/YunoHost-Apps/Webtrees_ynh"
 
 ynh_send_readme_to_admin "$message"
 
