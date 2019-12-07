@@ -140,7 +140,7 @@ ynh_replace_string "__dbpass__" "$db_pwd"   "../conf/config.ini.php"
 ynh_replace_string "__dbname__" "$db_name"  "../conf/config.ini.php"
 
 # Copy the config file to the final path
-sudo cp ../conf/config.ini.php $final_path/data/.
+cp ../conf/config.ini.php $final_path/data/.
 
 # Load initial SQL into the new database
 ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/webtrees.sql"
@@ -195,7 +195,7 @@ ynh_add_fpm_config
 #=================================================
 
 chown -R $app: $final_path
-sudo chmod -R 700 $final_path/data
+chmod -R 700 $final_path/data
 
 #=================================================
 # STORE THE CONFIG FILE CHECKSUM
