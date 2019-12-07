@@ -45,6 +45,7 @@
             },
             {
                 "name": "username",
+                "type": "string",
                 "ask": {
                     "en": "Choose an admin username (Not a LDAP User)",
                     "fr": "Choisissez un nom d'utilisateur pour l'administrateur de Webtrees (ne doit pas être un utilisateur YunoHost existant)"
@@ -53,6 +54,7 @@
             },
             {
                 "name": "name",
+                "type": "string",
                 "ask": {
                     "en": "Name of the user (Not a LDAP User)",
                     "fr": "Nom de cet utilisateur"
@@ -61,6 +63,7 @@
             },
             {
                 "name": "email",
+                "type": "string",
                 "ask": {
                     "en": "Admin email (All the new registration will be sent on this email)",
                     "fr": "Adresse email de l'administrateur (Toutes les nouvelles inscriptions seront envoyées à cette adresse)"
