@@ -89,8 +89,8 @@ ynh_install_app_dependencies $pkg_dependencies
 
 # Restore permissions to app files
 
-sudo chown -R $app: "${final_path}"
-sudo chmod -R 700 $final_path/data
+chown -R $app: "${final_path}"
+chmod -R 700 $final_path/data
 
 #=================================================
 # RESTORE THE MYSQL DATABASE
