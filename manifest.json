@@ -40,7 +40,7 @@
                     "en": "Choose a path for Webtrees",
                     "fr": "Choisissez un chemin pour Webtrees"
                 },
-                "example": "/example",
+                "example": "/webtrees",
                 "default": "/webtrees"
             },
             {

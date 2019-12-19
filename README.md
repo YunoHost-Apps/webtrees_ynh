@@ -1,13 +1,13 @@
 # Webtrees for YunoHost
 [![Integration level](https://dash.yunohost.org/integration/webtrees.svg)](https://dash.yunohost.org/appci/app/webtrees)  
-[![Install webtrees with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=webtrees)
+[![Install Webtrees with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=webtrees)
+
+> *This package allow you to install >ebtrees quickly and simply on a YunoHost server.  
+If you don't have YunoHost, please see [here](https://yunohost.org/#/install) to know how to install and enjoy it.*
 
 **VERY IMPORTANT: There is a security fix in nginx. Please update as soon as posible regarless of any version you are on.**
 
-Leading on-line collaborative genealogy application https://www.webtrees.net<br>
-version: **1.7.13**, released **9 March 2019**<br>,<br>
-
-## Introduction
+## Overview
 
 webtrees is the web's leading online collaborative genealogy application.
 
@@ -18,8 +18,19 @@ webtrees allows you to view and edit your genealogy on your website. It has full
 
 **Note:** Its better to upgrade from the Webtrees admin pannel when new version arrives. <br><br>
 
-<b>Demo:</b>https://dev.webtrees.net/demo-dev/index.php?ctype=gedcom&ged=demo<br>
-<br>
+**Shipped version:** 1.7.13, released **9 March 2019**
+
+## Demo
+
+* [Official demo](https://dev.webtrees.net/demo-dev/index.php?ctype=gedcom&ged=demo)
+## Documentation
+
+ * Official documentation: https://wiki.webtrees.net
+
+## YunoHost specific features
+
+#### Multi-users support
+
 No LDAP configuration is there for Webtrees yet.<br>
 Multi-instance: **yes**
 
@@ -28,3 +39,25 @@ Multi-instance: **yes**
 * x86-64b - [![Build Status](https://ci-apps.yunohost.org/ci/logs/webtrees%20%28Community%29.svg)](https://ci-apps.yunohost.org/ci/apps/webtrees/)
 * ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/webtrees%20%28Community%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/webtrees/)
 * Jessie x86-64b - [![Build Status](https://ci-stretch.nohost.me/ci/logs/webtrees%20%28Community%29.svg)](https://ci-stretch.nohost.me/ci/apps/webtrees/)
+
+## Links
+
+ * Report a bug: https://github.com/YunoHost-Apps/webtrees_ynh/issues
+ * App website: https://www.webtrees.net
+ * Git repository: https://github.com/fisharebest/webtrees
+ * YunoHost website: https://yunohost.org/
+
+---
+
+Developers info
+----------------
+
+**Only if you want to use a testing branch for coding, instead of merging directly into master.**
+Please do your pull request to the [testing branch](https://github.com/YunoHost-Apps/webtrees_ynh/tree/testing).
+
+To try the testing branch, please proceed like that.
+```
+sudo yunohost app install https://github.com/YunoHost-Apps/webtrees_ynh/tree/testing --debug
+or
+sudo yunohost app upgrade webtrees -u https://github.com/YunoHost-Apps/webtrees_ynh/tree/testing --debug
+```
