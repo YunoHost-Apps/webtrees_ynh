@@ -1,6 +1,24 @@
 #!/bin/bash
 
-# ============= FUTURE YUNOHOST HELPER =============
+#=================================================
+# COMMON VARIABLES
+#=================================================
+
+# dependencies used by the app
+pkg_dependencies="php-gd php-xml mailutils"
+
+#=================================================
+# PERSONAL HELPERS
+#=================================================
+
+#=================================================
+# EXPERIMENTAL HELPERS
+#=================================================
+
+#=================================================
+# FUTURE OFFICIAL HELPERS
+#=================================================
+
 # Delete a file checksum from the app settings
 #
 # $app should be defined when calling this helper
@@ -11,13 +29,6 @@ ynh_delete_file_checksum () {
 	local checksum_setting_name=checksum_${1//[\/ ]/_}	# Replace all '/' and ' ' by '_'
 	ynh_app_setting_delete $app $checksum_setting_name
 }
-
-#=================================================
-# COMMON VARIABLES
-#=================================================
-
-# dependencies used by the app
-pkg_dependencies="php-gd php-xml mailutils "
 
 # Send an email to inform the administrator
 #

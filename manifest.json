@@ -8,7 +8,7 @@
     },
     "version":"1.7.13~ynh1",
     "url": "https://www.webtrees.net",
-    "license": "GNU",
+    "license": "GPL-3.0-or-later",
     "maintainer": {
         "name": "Anmol Sharma",
         "email": "anmol@datamol.org"
@@ -40,7 +40,7 @@
                     "en": "Choose a path for Webtrees",
                     "fr": "Choisissez un chemin pour Webtrees"
                 },
-                "example": "/example",
+                "example": "/webtrees",
                 "default": "/webtrees"
             },
             {
