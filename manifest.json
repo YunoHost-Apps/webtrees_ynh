@@ -6,7 +6,7 @@
         "en": "Webtrees is a free open source web-based genealogy application.",
         "fr": "Webtrees est un logiciel libre de généalogie en ligne."
     },
-    "version":"1.7.13~ynh1",
+    "version":"2.0.0~ynh1",
     "url": "https://www.webtrees.net",
     "license": "GPL-3.0-or-later",
     "maintainer": {

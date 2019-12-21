@@ -5,7 +5,7 @@
 > *This package allow you to install Webtrees quickly and simply on a YunoHost server.  
 If you don't have YunoHost, please see [here](https://yunohost.org/#/install) to know how to install and enjoy it.*
 
-**VERY IMPORTANT: There is a security fix in nginx. Please update as soon as posible regarless of any version you are on.**
+**VERY IMPORTANT: There is a security fix in nginx. Please update as soon as possible regarless of any version you are on.**
 
 ## Overview
 
@@ -16,9 +16,9 @@ webtrees is the web's leading online collaborative genealogy application.
 
 webtrees allows you to view and edit your genealogy on your website. It has full editing capabilities, full privacy functions, and supports imedia such as photos and document images. As an online program, it fosters extended family participation and good ancestral recording habits, as it simplifies the process of collaborating with others working on your family lines. Your latest information is always on your web site and available for others to see, defined by viewing rules you set.
 
-**Note:** Its better to upgrade from the Webtrees admin pannel when new version arrives. <br><br>
+**Note:** Its better to upgrade from the Webtrees admin panel when new version arrives. <br><br>
 
-**Shipped version:** 1.7.13, released **9 March 2019**
+**Shipped version:** 2.0.0, released **7 December 2019**
 
 ## Demo
 
