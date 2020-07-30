@@ -33,7 +33,7 @@ ynh_mysql_remove_db $db_user $db_name
 #=================================================
 # REMOVE DEPENDENCIES
 #=================================================
-ynh_print_info "Removing dependencies"
+ynh_print_info "Removing dependencies..."
 
 # Remove metapackage and its dependencies
 ynh_remove_app_dependencies
@@ -41,7 +41,7 @@ ynh_remove_app_dependencies
 #=================================================
 # REMOVE APP MAIN DIR
 #=================================================
-ynh_print_info "Removing app main directory"
+ynh_print_info "Removing app main directory..."
 
 # Remove the app directory securely
 ynh_secure_remove "$final_path"
@@ -49,7 +49,7 @@ ynh_secure_remove "$final_path"
 #=================================================
 # REMOVE NGINX CONFIGURATION
 #=================================================
-ynh_print_info "Removing nginx web server configuration"
+ynh_print_info "Removing nginx web server configuration..."
 
 # Remove the dedicated nginx config
 ynh_remove_nginx_config
@@ -67,7 +67,7 @@ ynh_remove_fpm_config
 #=================================================
 # REMOVE DEDICATED USER
 #=================================================
-ynh_print_info "Removing the dedicated system user"
+ynh_print_info "Removing the dedicated system user..."
 
 # Delete a system user
 ynh_system_user_delete $app
