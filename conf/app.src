@@ -1,5 +1,5 @@
-SOURCE_URL=https://github.com/fisharebest/webtrees/archive/2.0.0.tar.gz
-SOURCE_SUM=8fd263da34e6161ef8a8d8b2f64461a7fcc7d20cc0249f9b16b3427900534b50
+SOURCE_URL=https://github.com/fisharebest/webtrees/archive/2.0.7.tar.gz
+SOURCE_SUM=4c309b0bbe1d20b1080c36e13dc7441f27987d74f766a52cebaf4487c2dd1b9f
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true
