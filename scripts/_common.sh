@@ -5,7 +5,7 @@
 #=================================================
 
 # dependencies used by the app
-pkg_dependencies="php-gd php-xml mailutils"
+pkg_dependencies="php7.3-gd php7.3-xml mailutils php7.3-fpm"
 
 #=================================================
 # PERSONAL HELPERS
@@ -18,17 +18,6 @@ pkg_dependencies="php-gd php-xml mailutils"
 #=================================================
 # FUTURE OFFICIAL HELPERS
 #=================================================
-
-# Delete a file checksum from the app settings
-#
-# $app should be defined when calling this helper
-#
-# usage: ynh_remove_file_checksum file
-# | arg: file - The file for which the checksum will be deleted
-ynh_delete_file_checksum () {
-	local checksum_setting_name=checksum_${1//[\/ ]/_}	# Replace all '/' and ' ' by '_'
-	ynh_app_setting_delete $app $checksum_setting_name
-}
 
 # Send an email to inform the administrator
 #
@@ -68,12 +57,7 @@ ynh_send_readme_to_admin() {
 
 	local mail_subject="☁️🆈🅽🅷☁️: \`$app\` has important message for you"
 
-	local mail_message="This is an automated message from your beloved YunoHost server.
-Specific information for the application $app.
-$app_message
----
-Automatic diagnosis data from YunoHost
-$(yunohost tools diagnosis | grep -B 100 "services:" | sed '/services:/d')"
+	local mail_message="This is an automated message from your beloved YunoHost server. \nSpecific information for the application $app.\n$app_message\n---\nAutomatic diagnosis data from YunoHost\n$(yunohost tools diagnosis | grep -B 100 "services:" | sed '/services:/d')"
 	
 	# Define binary to use for mail command
 	if [ -e /usr/bin/bsd-mailx ]

@@ -111,7 +111,7 @@ ynh_replace_string "__dbpass__" "$db_pwd"   "../conf/config.ini.php"
 ynh_replace_string "__dbname__" "$db_name"  "../conf/config.ini.php"
 
 # Copy the config file to the final path
-sudo cp ../conf/config.ini.php $final_path/data/.
+cp ../conf/config.ini.php $final_path/data/.
 
 # Load initial SQL into the new database
 ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/webtrees.sql"
@@ -139,7 +139,7 @@ ynh_store_file_checksum "$final_path/data/config.ini.php"
 
 # Set permissions to app files
 chown -R $app: $final_path
-sudo chmod -R 700 $final_path/data
+chmod -R 700 $final_path/data
 
 #=================================================
 # SETUP SSOWAT
@@ -149,8 +149,8 @@ ynh_print_info "Configuring SSOwat..."
 # Make app public if necessary
 if [ $is_public -eq 1 ]
 then
-	# unprotected_uris allows SSO credentials to be passed anyway.
-	ynh_app_setting_set $app unprotected_uris "/"
+    # unprotected_uris allows SSO credentials to be passed anyway.
+    ynh_app_setting_set $app unprotected_uris "/"
 fi
 
 #=================================================

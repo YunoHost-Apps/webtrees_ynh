@@ -3,8 +3,8 @@
     "id": "webtrees",
     "packaging_format": 1,
     "description": {
-        "en": "Webtrees is a free open source web-based genealogy application.",
-        "fr": "Webtrees est un logiciel libre de généalogie en ligne."
+        "en": "This app is a free open source web-based genealogy application.",
+        "fr": "Cette application est un logiciel libre de généalogie en ligne."
     },
     "version":"2.0.7~ynh1",
     "url": "https://www.webtrees.net",
@@ -14,12 +14,12 @@
         "email": "anmol@datamol.org"
     },
     "requirements": {
-        "yunohost": ">= 3.5"
+        "yunohost": ">= 3.8"
     },
     "multi_instance": true,
     "services": [
-         "nginx",
-        "php7.1-fpm",
+        "nginx",
+        "php7.3-fpm",
         "mysql"
     ],
     "arguments": {
