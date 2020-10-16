@@ -18,7 +18,7 @@ Webtrees allows you to view and edit your genealogy on your website. It has full
 
 ## Screenshots
 
-![](https://webtrees.net/assets/img/tree-mock-screen.png)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Webtrees.png/1200px-Webtrees.png)
 
 ## Demo
 
