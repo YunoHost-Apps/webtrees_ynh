@@ -3,8 +3,8 @@
     "id": "webtrees",
     "packaging_format": 1,
     "description": {
-        "en": "This app is a free open source web-based genealogy application.",
-        "fr": "Cette application est un logiciel libre de généalogie en ligne."
+        "en": "Web-based genealogy application",
+        "fr": "Logiciel libre de généalogie en ligne"
     },
     "version":"2.0.9~ynh1",
     "url": "https://www.webtrees.net",
