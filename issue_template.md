@@ -34,8 +34,8 @@ about: Create a report to help us debug, it would be nice to fill the template a
 - *If you used the webadmin, please perform the equivalent command from the CLI first.*
 - *If the error occurs in your browser, explain what you did:*
    1. *Go to '...'*
-   2. *Click on '....'*
-   3. *Scroll down to '....'*
+   2. *Click on '...'*
+   3. *Scroll down to '...'*
    4. *See error*
 
 **Expected behavior**

@@ -4,8 +4,10 @@
 # COMMON VARIABLES
 #=================================================
 
+YNH_PHP_VERSION="7.3"
+
 # dependencies used by the app
-pkg_dependencies="php7.3-gd php7.3-xml mailutils php7.3-fpm"
+pkg_dependencies="php${YNH_PHP_VERSION}-gd php${YNH_PHP_VERSION}-xml mailutils"
 
 #=================================================
 # PERSONAL HELPERS
