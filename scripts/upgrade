@@ -12,10 +12,9 @@ source /usr/share/yunohost/helpers
 #=================================================
 # LOAD SETTINGS
 #=================================================
-ynh_print_info "Loading installation settings..."
+ynh_script_progression --message="Loading installation settings..."
 
 app=$YNH_APP_INSTANCE_NAME
-
 
 # Retrieve app settings
 domain=$(ynh_app_setting_get "$app" domain)
@@ -26,7 +25,7 @@ final_path=$(ynh_app_setting_get $app final_path)
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
-ynh_print_info "Ensuring downward compatibility..."
+ynh_script_progression --message="Ensuring downward compatibility..."
 
 # Fix is_public as a boolean value
 if [ "$is_public" = "Yes" ]; then
@@ -39,7 +38,7 @@ fi
 
 # If db_name doesn't exist, create it
 if [ -z $db_name ]; then
-	db_name=$(ynh_sanitize_dbid $app)
+	db_name=$(ynh_sanitize_dbid --db_name=$app)
 	ynh_app_setting_set $app db_name $db_name
 fi
 
@@ -49,11 +48,10 @@ if [ -z $final_path ]; then
 	ynh_app_setting_set $app final_path $final_path
 fi
 
-
 #=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
 #=================================================
-ynh_print_info "Backing up the app before upgrading (may take a while)..."
+ynh_script_progression --message="Backing up Webtrees before upgrading (may take a while)..."
 
 # Backup the current version of the app
 ynh_backup_before_upgrade
@@ -69,58 +67,57 @@ ynh_abort_if_errors
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_print_info "Upgrading source files..."
+ynh_script_progression --message="Upgrading source files..."
 
 # Move old app dir
-sudo mv ${final_path} ${final_path}.old
+mv ${final_path} ${final_path}.old
 
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source "$final_path"
 
 # restore data
-sudo cp -a ${final_path}.old/data ${final_path}
+cp -a ${final_path}.old/data ${final_path}
 
 # delete temp directory
-sudo rm -Rf ${final_path}.old
+rm -Rf ${final_path}.old
 
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
-ynh_print_info "Upgrading nginx web server configuration..."
+ynh_script_progression --message="Upgrading NGINX web server configuration..."
 
-# Create a dedicated nginx config
+# Create a dedicated NGINX config
 ynh_add_nginx_config
 
 #=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
-ynh_print_info "Upgrading dependencies..."
+ynh_script_progression --message="Upgrading dependencies..."
 
 ynh_install_app_dependencies $pkg_dependencies
 
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_print_info "Making sure dedicated system user exists..."
+ynh_script_progression --message="Making sure dedicated system user exists..."
 
 # Create a dedicated user (if not existing)
-ynh_system_user_create $app
+ynh_system_user_create --username=$app
 
 #=================================================
 # PHP-FPM CONFIGURATION
 #=================================================
-ynh_print_info "Upgrading php-fpm configuration..."
+ynh_script_progression --message="Upgrading PHP-FPM configuration..."
 
-# Create a dedicated php-fpm config
-ynh_add_fpm_config
+# Create a dedicated PHP-FPM config
+ynh_add_fpm_config --phpversion=$YNH_PHP_VERSION 
+
 #=================================================
 # SPECIFIC UPGRADE
 #=================================================
 # ...
 #=================================================
 
-### Verify the checksum of a file, stored by `ynh_store_file_checksum` in the install script.
-### And create a backup of this file if the checksum is different. So the file will be backed up if the admin had modified it.
 ynh_backup_if_checksum_is_different "$final_path/data/config.ini.php"
 # Recalculate and store the checksum of the file for the next upgrade.
 ynh_store_file_checksum "$final_path/data/config.ini.php"
@@ -133,12 +130,12 @@ ynh_store_file_checksum "$final_path/data/config.ini.php"
 
 # Set permissions on app files
 chown -R $app: $final_path
-sudo chmod -R 700 $final_path/data
+chmod -R 700 $final_path/data
 
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_print_info "Upgrading SSOwat configuration..."
+ynh_script_progression --message="Upgrading SSOwat configuration..."
 
 # Make app public if necessary
 if [ $is_public -eq 1 ]
@@ -148,14 +145,17 @@ then
 fi
 
 #=================================================
+# GENERIC FINALIZATION
+#=================================================
 # RELOAD NGINX
 #=================================================
-ynh_print_info "Reloading nginx web server..."
+ynh_script_progression --message="Reloading NGINX web server..." --weight=2
 
-systemctl reload nginx
+ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_print_info "Upgrade of $app completed"
+ynh_script_progression --message="Upgrade of $app completed" --last
+

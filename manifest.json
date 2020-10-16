@@ -3,22 +3,22 @@
     "id": "webtrees",
     "packaging_format": 1,
     "description": {
-        "en": "Webtrees is a free open source web-based genealogy application.",
-        "fr": "Webtrees est un logiciel libre de généalogie en ligne."
+        "en": "Web-based genealogy application",
+        "fr": "Logiciel libre de généalogie en ligne"
     },
-    "version":"1.7.13~ynh1",
+    "version":"2.0.9~ynh1",
     "url": "https://www.webtrees.net",
-    "license": "GNU",
+    "license": "GPL-3.0-or-later",
     "maintainer": {
         "name": "Anmol Sharma",
         "email": "anmol@datamol.org"
     },
     "requirements": {
-        "yunohost": ">> 3.0.0"
+        "yunohost": ">= 4.0"
     },
     "multi_instance": true,
     "services": [
-         "nginx",
+        "nginx",
         "php7.0-fpm",
         "mysql"
     ],
@@ -40,11 +40,12 @@
                     "en": "Choose a path for Webtrees",
                     "fr": "Choisissez un chemin pour Webtrees"
                 },
-                "example": "/example",
+                "example": "/webtrees",
                 "default": "/webtrees"
             },
             {
                 "name": "username",
+                "type": "string",
                 "ask": {
                     "en": "Choose an admin username (Not a LDAP User)",
                     "fr": "Choisissez un nom d'utilisateur pour l'administrateur de Webtrees (ne doit pas être un utilisateur YunoHost existant)"
@@ -53,6 +54,7 @@
             },
             {
                 "name": "name",
+                "type": "string",
                 "ask": {
                     "en": "Name of the user (Not a LDAP User)",
                     "fr": "Nom de cet utilisateur"
@@ -61,6 +63,7 @@
             },
             {
                 "name": "email",
+                "type": "string",
                 "ask": {
                     "en": "Admin email (All the new registration will be sent on this email)",
                     "fr": "Adresse email de l'administrateur (Toutes les nouvelles inscriptions seront envoyées à cette adresse)"
@@ -74,6 +77,10 @@
                     "en": "Is it a public application?",
                     "fr": "Est-ce une application publique ?"
                 },
+		"help": {
+		    "en": "If checked, the app will be public",
+		    "fr": "Si cochée, votre application sera publique"
+		},
                 "default": true
             }
         ]
