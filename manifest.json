@@ -6,7 +6,7 @@
         "en": "This app is a free open source web-based genealogy application.",
         "fr": "Cette application est un logiciel libre de généalogie en ligne."
     },
-    "version":"2.0.7~ynh1",
+    "version":"2.0.9~ynh1",
     "url": "https://www.webtrees.net",
     "license": "GPL-3.0-or-later",
     "maintainer": {
