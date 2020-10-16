@@ -173,7 +173,7 @@ ynh_systemd_action --service_name=nginx --action=reload
 
 message=" $app was successfully installed :) \n 
 
-Please open https://$domain$path_url \n 
+Please open https://$domain$path_url 
 
 Your credentials for the admin panel are:
 - admin username: $admin_username
