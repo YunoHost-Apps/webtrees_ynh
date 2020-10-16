@@ -175,9 +175,9 @@ message=" $app was successfully installed :) \n
 
 Please open https://$domain$path_url \n 
 
-The admin username is: $admin_username \n 
-
-And the admin password is: $password \n 
+Your credentials for the admin panel are:
+- admin username: $admin_username
+- admin password: $password
 
 If you facing an issue or want to improve this app, please open a new issue in this project: https://github.com/YunoHost-Apps/Webtrees_ynh"
 
