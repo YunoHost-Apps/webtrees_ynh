@@ -37,8 +37,6 @@ app=$YNH_APP_INSTANCE_NAME
 #=================================================
 ynh_script_progression --message="Validating installation parameters..."
 
-### If the app uses nginx as web server (written in HTML/PHP in most cases), the final path should be "/var/www/$app".
-### If the app provides an internal web server (or uses another application server such as uwsgi), the final path should be "/opt/yunohost/$app"
 final_path=/var/www/$app
 test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
 
@@ -84,7 +82,7 @@ ynh_setup_source --dest_dir="$final_path"
 #=================================================
 ynh_script_progression --message="Configuring NGINX web server..."
 
-# Create a dedicated nginx config
+# Create a dedicated NGINX config
 ynh_add_nginx_config
 
 #=================================================
@@ -100,7 +98,7 @@ ynh_system_user_create --username=$app
 #=================================================
 ynh_script_progression --message="Configuring PHP-FPM..." 
 
-# Create a dedicated php-fpm config
+# Create a dedicated PHP-FPM config
 ynh_add_fpm_config
 phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
 
@@ -109,9 +107,9 @@ phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
 #=================================================
 
 # Adding the details of the database to the config file
-ynh_replace_string "__dbuser__" "$db_name"  "../conf/config.ini.php"
-ynh_replace_string "__dbpass__" "$db_pwd"   "../conf/config.ini.php"
-ynh_replace_string "__dbname__" "$db_name"  "../conf/config.ini.php"
+ynh_replace_string --match_string="__dbuser__" --replace_string="$db_name" --target_file="../conf/config.ini.php"
+ynh_replace_string --match_string="__dbpass__" --replace_string="$db_pwd"  --target_file="../conf/config.ini.php"
+ynh_replace_string --match_string="__dbname__" --replace_string="$db_name" --target_file="../conf/config.ini.php"
 
 # Copy the config file to the final path
 cp ../conf/config.ini.php $final_path/data/.
@@ -120,10 +118,10 @@ cp ../conf/config.ini.php $final_path/data/.
 ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/webtrees.sql"
 
 # Replace variables in sql scripts
-ynh_replace_string "__USER_NAME__"  "$admin_username" "../conf/sql/admin.sql"
-ynh_replace_string "__NAME__"       "$admin_name"     "../conf/sql/admin.sql"
-ynh_replace_string "__USER_EMAIL__" "$admin_email"    "../conf/sql/admin.sql"
-ynh_replace_string "__PASSWORD__"   "$admin_password" "../conf/sql/admin.sql"
+ynh_replace_string --match_string="__USER_NAME__"  --replace_string="$admin_username" --target_file="../conf/sql/admin.sql"
+ynh_replace_string --match_string="__NAME__"       --replace_string="$admin_name"     --target_file="../conf/sql/admin.sql"
+ynh_replace_string --match_string="__USER_EMAIL__" --replace_string="$admin_email"    --target_file="../conf/sql/admin.sql"
+ynh_replace_string --match_string="__PASSWORD__"   --replace_string="$admin_password" --target_file="../conf/sql/admin.sql"
 
 ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/admin.sql"
 
@@ -140,10 +138,6 @@ ynh_store_file_checksum --file="$final_path/data/config.ini.php"
 # SECURE FILES AND DIRECTORIES
 #=================================================
 
-### For security reason, any app should set the permissions to root: before anything else.
-### Then, if write authorization is needed, any access should be given only to directories
-### that really need such authorization.
-
 # Set permissions to app files
 chown -R $app: $final_path
 chmod -R 700 $final_path/data
@@ -153,11 +147,12 @@ chmod -R 700 $final_path/data
 #=================================================
 ynh_script_progression --message="Configuring SSOwat..."
 
-# Make app public if necessary
+# Make app public if necessary or protect it
 if [ $is_public -eq 1 ]
 then
-	# unprotected_uris allows SSO credentials to be passed anyway.
-	ynh_app_setting_set --app=$app --key=unprotected_uris --value="/"
+	# Everyone can access the app.
+	# The "main" permission is automatically created before the install script.
+	ynh_permission_update --permission "main" --add "visitors"
 fi
 
 #=================================================
