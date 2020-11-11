@@ -41,7 +41,7 @@ ynh_remove_app_dependencies
 #=================================================
 # REMOVE APP MAIN DIR
 #=================================================
-ynh_script_progression --message="Removing Webtrees main directory..."
+ynh_script_progression --message="Removing $app main directory..."
 
 # Remove the app directory securely
 ynh_secure_remove --file="$final_path"
@@ -76,4 +76,4 @@ ynh_system_user_delete --username=$app
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Removal of Webtrees completed"
+ynh_script_progression --message="Removal of $app completed"
