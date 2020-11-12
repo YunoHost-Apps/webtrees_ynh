@@ -51,7 +51,7 @@ fi
 #=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
 #=================================================
-ynh_script_progression --message="Backing up Webtrees before upgrading (may take a while)..."
+ynh_script_progression --message="Backing up $app before upgrading (may take a while)..."
 
 # Backup the current version of the app
 ynh_backup_before_upgrade
@@ -79,7 +79,7 @@ ynh_setup_source "$final_path"
 cp -a ${final_path}.old/data ${final_path}
 
 # delete temp directory
-rm -Rf ${final_path}.old
+ynh_secure_remove --file=${final_path}.old
 
 #=================================================
 # NGINX CONFIGURATION
@@ -110,7 +110,7 @@ ynh_system_user_create --username=$app
 ynh_script_progression --message="Upgrading PHP-FPM configuration..."
 
 # Create a dedicated PHP-FPM config
-ynh_add_fpm_config --phpversion=$YNH_PHP_VERSION 
+ynh_add_fpm_config
 
 #=================================================
 # SPECIFIC UPGRADE
@@ -133,18 +133,6 @@ chown -R $app: $final_path
 chmod -R 700 $final_path/data
 
 #=================================================
-# SETUP SSOWAT
-#=================================================
-ynh_script_progression --message="Upgrading SSOwat configuration..."
-
-# Make app public if necessary
-if [ $is_public -eq 1 ]
-then
-	# unprotected_uris allows SSO credentials to be passed anyway
-	ynh_app_setting_set $app unprotected_uris "/"
-fi
-
-#=================================================
 # GENERIC FINALIZATION
 #=================================================
 # RELOAD NGINX
@@ -158,4 +146,3 @@ ynh_systemd_action --service_name=nginx --action=reload
 #=================================================
 
 ynh_script_progression --message="Upgrade of $app completed" --last
-
