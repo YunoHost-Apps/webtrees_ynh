@@ -1,7 +1,7 @@
 # Webtrees for YunoHost
 
 [![Integration level](https://dash.yunohost.org/integration/webtrees.svg)](https://dash.yunohost.org/appci/app/webtrees) ![](https://ci-apps.yunohost.org/ci/badges/webtrees.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/webtrees.maintain.svg)  
-[![Install Webtrees with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=webtrees)
+[![Install Webtrees with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=webtrees)
 
 > *This package allow you to install Webtrees quickly and simply on a YunoHost server.  
 If you don't have YunoHost, please see [here](https://yunohost.org/#/install) to know how to install and enjoy it.*
@@ -14,7 +14,7 @@ Webtrees allows you to view and edit your genealogy on your website. It has full
 
 **Note:** Its better to upgrade from the Webtrees admin panel when new version arrives.
 
-**Shipped version:** 2.0.10
+**Shipped version:** 2.0.11
 
 ## Screenshots
 
