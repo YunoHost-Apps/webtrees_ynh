@@ -6,7 +6,7 @@
         "en": "Web-based genealogy application",
         "fr": "Logiciel libre de généalogie en ligne"
     },
-    "version":"2.0.10~ynh1",
+    "version":"2.0.11~ynh1",
     "url": "https://www.webtrees.net",
     "license": "GPL-3.0-or-later",
     "maintainer": {
@@ -77,10 +77,10 @@
                     "en": "Is it a public application?",
                     "fr": "Est-ce une application publique ?"
                 },
-		"help": {
-		    "en": "If checked, the app will be public",
-		    "fr": "Si cochée, votre application sera publique"
-		},
+                "help": {
+		          "en": "If checked, Webtrees will be public",
+		          "fr": "Si cochée, Webtrees sera publique"
+                },
                 "default": true
             }
         ]
