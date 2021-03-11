@@ -19,6 +19,7 @@
 		setup_private=1
 		setup_public=1
 		upgrade=1
+		upgrade=1	from_commit=0127b6ce332d4314d139cd62796cb0350adc37f8
 		backup_restore=1
 		multi_instance=1
 		port_already_use=0
@@ -26,3 +27,9 @@
 ;;; Options
 Email=anmol@datamol.org
 Notification=change
+;;; Upgrade options
+	; commit=0127b6ce332d4314d139cd62796cb0350adc37f8
+		name=Testing (#18)
+		manifest_arg=domain=DOMAIN&path=PATH&admin=USER&language=fr&is_public=1&password=pass&port=666&
+
+
