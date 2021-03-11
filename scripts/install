@@ -48,7 +48,6 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 #=================================================
 ynh_script_progression --message="Storing installation settings..."
 
-ynh_app_setting_set --app=$app --key=is_public --value=$is_public
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
 
@@ -107,9 +106,9 @@ phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
 #=================================================
 
 # Adding the details of the database to the config file
-ynh_replace_string --match_string="__dbuser__" --replace_string="$db_name" --target_file="../conf/config.ini.php"
-ynh_replace_string --match_string="__dbpass__" --replace_string="$db_pwd"  --target_file="../conf/config.ini.php"
-ynh_replace_string --match_string="__dbname__" --replace_string="$db_name" --target_file="../conf/config.ini.php"
+ynh_replace_string --match_string="__DB_USER__" --replace_string="$db_name" --target_file="../conf/config.ini.php"
+ynh_replace_string --match_string="__DB_PWD__" --replace_string="$db_pwd"  --target_file="../conf/config.ini.php"
+ynh_replace_string --match_string="__DB_NAME__" --replace_string="$db_name" --target_file="../conf/config.ini.php"
 
 # Copy the config file to the final path
 cp ../conf/config.ini.php $final_path/data/.
@@ -145,14 +144,12 @@ chmod -R 700 $final_path/data
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_script_progression --message="Configuring SSOwat..."
+ynh_script_progression --message="Configuring permissions..."
 
 # Make app public if necessary or protect it
 if [ $is_public -eq 1 ]
 then
-	# Everyone can access the app.
-	# The "main" permission is automatically created before the install script.
-	ynh_permission_update --permission "main" --add "visitors"
+	ynh_permission_update --permission="main" --add="visitors"
 fi
 
 #=================================================
