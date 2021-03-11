@@ -19,7 +19,6 @@ app=$YNH_APP_INSTANCE_NAME
 # Retrieve app settings
 domain=$(ynh_app_setting_get "$app" domain)
 path_url=$(ynh_app_setting_get "$app" path)
-is_public=$(ynh_app_setting_get "$app" is_public)
 final_path=$(ynh_app_setting_get $app final_path)
 
 #=================================================
@@ -46,6 +45,13 @@ fi
 if [ -z $final_path ]; then
 	final_path=/var/www/$app
 	ynh_app_setting_set $app final_path $final_path
+fi
+
+# Cleaning legacy permissions
+if ynh_legacy_permissions_exists; then
+	ynh_legacy_permissions_delete_all
+
+	ynh_app_setting_delete --app=$app --key=is_public
 fi
 
 #=================================================
