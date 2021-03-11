@@ -6,7 +6,7 @@
         "en": "Web-based genealogy application",
         "fr": "Logiciel libre de généalogie en ligne"
     },
-    "version":"2.0.11~ynh1",
+    "version":"2.0.12~ynh1",
     "url": "https://www.webtrees.net",
     "license": "GPL-3.0-or-later",
     "maintainer": {
@@ -14,12 +14,12 @@
         "email": "anmol@datamol.org"
     },
     "requirements": {
-        "yunohost": ">= 4.0.0"
+        "yunohost": ">= 4.1.7"
     },
     "multi_instance": true,
     "services": [
         "nginx",
-        "php7.0-fpm",
+        "php7.3-fpm",
         "mysql"
     ],
     "arguments": {

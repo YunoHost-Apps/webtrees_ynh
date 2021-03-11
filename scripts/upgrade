@@ -17,24 +17,14 @@ ynh_script_progression --message="Loading installation settings..."
 app=$YNH_APP_INSTANCE_NAME
 
 # Retrieve app settings
-domain=$(ynh_app_setting_get "$app" domain)
-path_url=$(ynh_app_setting_get "$app" path)
-is_public=$(ynh_app_setting_get "$app" is_public)
-final_path=$(ynh_app_setting_get $app final_path)
+domain=$(ynh_app_setting_get --app=$app --key=domain)
+path_url=$(ynh_app_setting_get --app=$app --key=path)
+final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
 ynh_script_progression --message="Ensuring downward compatibility..."
-
-# Fix is_public as a boolean value
-if [ "$is_public" = "Yes" ]; then
-	ynh_app_setting_set $app is_public 1
-	is_public=1
-elif [ "$is_public" = "No" ]; then
-	ynh_app_setting_set $app is_public 0
-	is_public=0
-fi
 
 # If db_name doesn't exist, create it
 if [ -z $db_name ]; then
@@ -46,6 +36,13 @@ fi
 if [ -z $final_path ]; then
 	final_path=/var/www/$app
 	ynh_app_setting_set $app final_path $final_path
+fi
+
+# Cleaning legacy permissions
+if ynh_legacy_permissions_exists; then
+	ynh_legacy_permissions_delete_all
+
+	ynh_app_setting_delete --app=$app --key=is_public
 fi
 
 #=================================================
@@ -114,8 +111,6 @@ ynh_add_fpm_config
 
 #=================================================
 # SPECIFIC UPGRADE
-#=================================================
-# ...
 #=================================================
 
 ynh_backup_if_checksum_is_different "$final_path/data/config.ini.php"
