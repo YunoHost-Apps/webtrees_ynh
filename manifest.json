@@ -6,7 +6,7 @@
         "en": "Web-based genealogy application",
         "fr": "Logiciel libre de généalogie en ligne"
     },
-    "version":"2.0.13~ynh1",
+    "version":"2.0.13~ynh2",
     "url": "https://www.webtrees.net",
     "license": "GPL-3.0-or-later",
     "maintainer": {
@@ -27,19 +27,11 @@
             {
                 "name": "domain",
                 "type": "domain",
-                "ask": {
-                    "en": "Choose a domain name for Webtrees",
-                    "fr": "Choisissez un domaine pour Webtrees"
-                },
                 "example": "example.com"
             },
             {
                 "name": "path",
                 "type": "path",
-                "ask": {
-                    "en": "Choose a path for Webtrees",
-                    "fr": "Choisissez un chemin pour Webtrees"
-                },
                 "example": "/webtrees",
                 "default": "/webtrees"
             },
@@ -73,10 +65,6 @@
             {
                 "name": "is_public",
                 "type": "boolean",
-                "ask": {
-                    "en": "Is it a public application?",
-                    "fr": "Est-ce une application publique ?"
-                },
                 "help": {
 		          "en": "If checked, Webtrees will be public",
 		          "fr": "Si cochée, Webtrees sera publique"
