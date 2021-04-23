@@ -42,8 +42,8 @@ How to configure this app: From an admin panel, a plain file with SSH, or any ot
 
 #### Supported architectures
 
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/webtrees%20%28Community%29.svg)](https://ci-apps.yunohost.org/ci/apps/webtrees/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/webtrees%20%28Community%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/webtrees/)
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/webtrees.svg)](https://ci-apps.yunohost.org/ci/apps/webtrees/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/webtrees.svg)](https://ci-apps-arm.yunohost.org/ci/apps/webtrees/)
 
 ## Links
 
