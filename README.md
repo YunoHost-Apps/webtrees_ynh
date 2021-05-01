@@ -14,7 +14,7 @@ Webtrees allows you to view and edit your genealogy on your website. It has full
 
 **Note:** Its better to upgrade from the Webtrees admin panel when new version arrives.
 
-**Shipped version:** 2.0.14
+**Shipped version:** 2.0.15
 
 ## Screenshots
 
@@ -42,8 +42,8 @@ How to configure this app: From an admin panel, a plain file with SSH, or any ot
 
 #### Supported architectures
 
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/webtrees%20%28Community%29.svg)](https://ci-apps.yunohost.org/ci/apps/webtrees/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/webtrees%20%28Community%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/webtrees/)
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/webtrees.svg)](https://ci-apps.yunohost.org/ci/apps/webtrees/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/webtrees.svg)](https://ci-apps-arm.yunohost.org/ci/apps/webtrees/)
 
 ## Links
 
