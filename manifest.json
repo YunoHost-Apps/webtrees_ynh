@@ -6,7 +6,7 @@
         "en": "Web-based genealogy application",
         "fr": "Logiciel libre de généalogie en ligne"
     },
-    "version":"2.0.15~ynh1",
+    "version":"2.0.16~ynh1",
     "url": "https://www.webtrees.net",
     "license": "GPL-3.0-or-later",
     "maintainer": {
