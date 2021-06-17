@@ -87,8 +87,8 @@ ynh_setup_source --dest_dir="$final_path"
 
 chmod 750 "$final_path"
 chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
-#chmod -R 700 $final_path/data
+chown -R $app: "$final_path"
+chmod -R 700 $final_path/data
 
 #=================================================
 # NGINX CONFIGURATION
