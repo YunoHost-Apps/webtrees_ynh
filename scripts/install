@@ -77,6 +77,11 @@ ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$final_path"
 
+chmod 750 "$final_path"
+chmod -R 700 $final_path/data
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
+
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
@@ -109,9 +114,6 @@ phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
 # Adding the details of the database to the config file
 ynh_add_config --template="../conf/config.ini.php" --destination="$final_path/data/config.ini.php"
 
-# # Copy the config file to the final path
-# cp ../conf/config.ini.php $final_path/data/.
-
 # Load initial SQL into the new database
 ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/webtrees.sql"
 
@@ -122,16 +124,6 @@ ynh_replace_string --match_string="__USER_EMAIL__" --replace_string="$admin_emai
 ynh_replace_string --match_string="__PASSWORD__"   --replace_string="$admin_password" --target_file="../conf/sql/admin.sql"
 
 ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/admin.sql"
-
-#=================================================
-# GENERIC FINALIZATION
-#=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
-
-# Set permissions to app files
-chown -R $app: $final_path
-chmod -R 700 $final_path/data
 
 #=================================================
 # SETUP SSOWAT
