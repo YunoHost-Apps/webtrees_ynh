@@ -22,6 +22,26 @@ path_url=$(ynh_app_setting_get --app=$app --key=path)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 
 #=================================================
+# CHECK VERSION
+#=================================================
+
+upgrade_type=$(ynh_check_app_version_changed)
+
+#=================================================
+# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
+#=================================================
+ynh_script_progression --message="Backing up $app before upgrading (may take a while)..."
+
+# Backup the current version of the app
+ynh_backup_before_upgrade
+ynh_clean_setup () {
+	# restore it if the upgrade fails
+	ynh_restore_upgradebackup
+}
+# Exit if an error occurs during the execution of the script
+ynh_abort_if_errors
+
+#=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
 ynh_script_progression --message="Ensuring downward compatibility..."
@@ -46,20 +66,6 @@ if ynh_legacy_permissions_exists; then
 fi
 
 #=================================================
-# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
-#=================================================
-ynh_script_progression --message="Backing up $app before upgrading (may take a while)..."
-
-# Backup the current version of the app
-ynh_backup_before_upgrade
-ynh_clean_setup () {
-	# restore it if the upgrade fails
-	ynh_restore_upgradebackup
-}
-# Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
-
-#=================================================
 # CREATE DEDICATED USER
 #=================================================
 ynh_script_progression --message="Making sure dedicated system user exists..."
@@ -74,17 +80,21 @@ ynh_system_user_create --username=$app --home_dir="$final_path"
 #=================================================
 ynh_script_progression --message="Upgrading source files..."
 
-# Move old app dir
-mv ${final_path} ${final_path}.old
+if [ "$upgrade_type" == "UPGRADE_APP" ]
+then
+	ynh_script_progression --message="Upgrading source files..."
+	# Move old app dir
+	mv ${final_path} ${final_path}.old
 
-# Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source "$final_path"
+	# Download, check integrity, uncompress and patch the source from app.src
+	ynh_setup_source "$final_path"
 
-# restore data
-cp -a ${final_path}.old/data ${final_path}
+	# restore data
+	cp -a ${final_path}.old/data ${final_path}
 
-# delete temp directory
-ynh_secure_remove --file=${final_path}.old
+	# delete temp directory
+	ynh_secure_remove --file=${final_path}.old
+fi
 
 chmod 750 "$final_path"
 chmod -R 700 $final_path/data
