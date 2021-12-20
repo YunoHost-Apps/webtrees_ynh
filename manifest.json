@@ -6,15 +6,22 @@
         "en": "Web-based genealogy application",
         "fr": "Logiciel libre de généalogie en ligne"
     },
-    "version":"2.0.17~ynh1",
+    "version":"2.0.19~ynh1",
     "url": "https://www.webtrees.net",
+    "upstream": {
+        "license": "GPL-3.0-or-later",
+        "website": "https://www.webtrees.net",
+        "demo": "https://dev.webtrees.net/demo-stable/index.php?route=%2Fdemo-stable%2Ftree%2Fdemo",
+        "admindoc": "https://wiki.webtrees.net",
+        "code": "https://github.com/fisharebest/webtrees"
+    },
     "license": "GPL-3.0-or-later",
     "maintainer": {
         "name": "Anmol Sharma",
         "email": "anmol@datamol.org"
     },
     "requirements": {
-        "yunohost": ">= 4.2.4"
+        "yunohost": ">= 4.3.0"
     },
     "multi_instance": true,
     "services": [

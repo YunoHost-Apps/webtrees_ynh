@@ -76,14 +76,6 @@ ynh_script_progression --message="Making sure dedicated system user exists..."
 ynh_system_user_create --username=$app --home_dir="$final_path"
 
 #=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Making sure dedicated system user exists..."
-
-# Create a dedicated user (if not existing)
-ynh_system_user_create --username=$app --home_dir="$final_path"
-
-#=================================================
 # CHECK THE PATH
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -105,11 +97,6 @@ then
 	# delete temp directory
 	ynh_secure_remove --file=${final_path}.old
 fi
-
-chmod 750 "$final_path"
-chmod -R 700 $final_path/data
-chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
 
 chmod 750 "$final_path"
 chmod -R 700 $final_path/data
