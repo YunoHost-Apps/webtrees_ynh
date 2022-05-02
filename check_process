@@ -14,7 +14,8 @@
 		setup_private=1
 		setup_public=1
 		upgrade=1
-		upgrade=1	from_commit=0127b6ce332d4314d139cd62796cb0350adc37f8
+		#2.0.23~ynh1
+		upgrade=1	from_commit=ba7931d0524925cb4a4264ac857af9ea7c7e6120
 		backup_restore=1
 		multi_instance=1
 		change_url=1
@@ -22,6 +23,6 @@
 Email=anmol@datamol.org
 Notification=change
 ;;; Upgrade options
-	; commit=0127b6ce332d4314d139cd62796cb0350adc37f8
-		name=Testing (#18)
+	; commit=ba7931d0524925cb4a4264ac857af9ea7c7e6120
+		name=Testing (#42)
 		manifest_arg=domain=DOMAIN&path=PATH&admin=USER&language=fr&is_public=1&password=pass&port=666&
