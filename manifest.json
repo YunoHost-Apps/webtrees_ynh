@@ -6,7 +6,7 @@
         "en": "Web-based genealogy application",
         "fr": "Logiciel libre de généalogie en ligne"
     },
-    "version":"2.1.1~ynh2",
+    "version": "2.1.2~ynh1",
     "url": "https://www.webtrees.net",
     "upstream": {
         "license": "GPL-3.0-or-later",
@@ -30,7 +30,7 @@
         "mysql"
     ],
     "arguments": {
-        "install" : [
+        "install": [
             {
                 "name": "domain",
                 "type": "domain"
@@ -72,8 +72,8 @@
                 "name": "is_public",
                 "type": "boolean",
                 "help": {
-		          "en": "If checked, Webtrees will be public",
-		          "fr": "Si cochée, Webtrees sera publique"
+                    "en": "If checked, Webtrees will be public",
+                    "fr": "Si cochée, Webtrees sera publique"
                 },
                 "default": true
             }
