@@ -1,5 +1,5 @@
-SOURCE_URL=https://github.com/fisharebest/webtrees/releases/download/2.1.2/webtrees-2.1.2.zip
-SOURCE_SUM=9301711eae5daaf07cb4ec1ac88d65841d602aba53ae414c0fdac5d1cc8a011b
+SOURCE_URL=https://github.com/fisharebest/webtrees/releases/download/2.1.4/webtrees-2.1.4.zip
+SOURCE_SUM=4669dae1a6cbabba4e23c7514b3d5d4b5a59d42188728859bce2c45f1cc555a1
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=zip
 SOURCE_IN_SUBDIR=true
