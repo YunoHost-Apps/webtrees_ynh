@@ -150,7 +150,7 @@ ynh_systemd_action --service_name=nginx --action=reload
 #=================================================
 # SEND A README FOR THE ADMIN
 #=================================================
-ynh_script_progression --message="Sending a readme for the admin..." --weight=1
+ynh_script_progression --message="Sending a readme for the admin..."
 
 echo "Webtrees was successfully installed :)
 
