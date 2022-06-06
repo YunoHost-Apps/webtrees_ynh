@@ -146,8 +146,9 @@ ynh_systemd_action --service_name=nginx --action=reload
 #=================================================
 # SEND A README FOR THE ADMIN
 #=================================================
+ynh_script_progression --message="Sending a readme for the admin..." --weight=1
 
-message="Webtrees was successfully installed :)
+echo "Webtrees was successfully installed :)
 
 Please open https://$domain$path_url 
 
@@ -155,9 +156,9 @@ Your credentials for the admin panel are:
 - admin username: $admin_username
 - admin password: $password
 
-If you facing an issue or want to improve Webtrees, please open a new issue in this project: https://github.com/YunoHost-Apps/webtrees_ynh"
+If you facing an issue or want to improve Webtrees, please open a new issue in this project: https://github.com/YunoHost-Apps/webtrees_ynh" > mail_to_send
 
-ynh_send_readme_to_admin "$message"
+ynh_send_readme_to_admin --app_message="mail_to_send" --recipients="$admin" --type=install
 
 #=================================================
 # END OF SCRIPT
