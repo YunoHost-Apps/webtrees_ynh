@@ -28,11 +28,9 @@ ynh_abort_if_errors
 domain=$YNH_APP_ARG_DOMAIN
 path_url=$YNH_APP_ARG_PATH
 is_public=$YNH_APP_ARG_IS_PUBLIC
-admin_username=$YNH_APP_ARG_USERNAME
-admin_name=$YNH_APP_ARG_NAME
-admin_email=$YNH_APP_ARG_EMAIL
+admin=$YNH_APP_ARG_ADMIN
+email=$(ynh_user_get_info --username=$admin --key=mail)
 password=$(ynh_string_random 24)
-admin_password=$(openssl passwd -1 -salt xyz $password)
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -54,6 +52,7 @@ ynh_script_progression --message="Storing installation settings..."
 
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
+ynh_app_setting_set --app=$app --key=admin --value=$admin
 
 #=================================================
 # INSTALL DEPENDENCIES
@@ -121,13 +120,9 @@ ynh_add_config --template="../conf/config.ini.php" --destination="$final_path/da
 # Load initial SQL into the new database
 ynh_mysql_connect_as --user="$db_user" --password="$db_pwd" --database="$db_name" < "../conf/sql/webtrees.sql"
 
-# Replace variables in sql scripts
-ynh_replace_string --match_string="__USER_NAME__"  --replace_string="$admin_username" --target_file="../conf/sql/admin.sql"
-ynh_replace_string --match_string="__NAME__"       --replace_string="$admin_name"     --target_file="../conf/sql/admin.sql"
-ynh_replace_string --match_string="__USER_EMAIL__" --replace_string="$admin_email"    --target_file="../conf/sql/admin.sql"
-ynh_replace_string --match_string="__PASSWORD__"   --replace_string="$admin_password" --target_file="../conf/sql/admin.sql"
-
-ynh_mysql_connect_as --user="$db_user" --password="$db_pwd" --database="$db_name" < "../conf/sql/admin.sql"
+ynh_add_config --template="../conf/sql/admin.sql" --destination="/var/tmp/admin.sql"
+ynh_mysql_connect_as --user="$db_user" --password="$db_pwd" --database="$db_name" < "/var/tmp/admin.sql"
+ynh_secure_remove --file="/var/tmp/admin.sql"
 
 #=================================================
 # SETUP SSOWAT
@@ -157,7 +152,7 @@ echo "Webtrees was successfully installed :)
 Please open https://$domain$path_url 
 
 Your credentials for the admin panel are:
-- admin username: $admin_username
+- admin username: $admin
 - admin password: $password
 
 If you facing an issue or want to improve Webtrees, please open a new issue in this project: https://github.com/YunoHost-Apps/webtrees_ynh" > mail_to_send
