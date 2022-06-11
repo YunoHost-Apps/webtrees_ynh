@@ -32,6 +32,7 @@ admin=$YNH_APP_ARG_ADMIN
 email=$(ynh_user_get_info --username=$admin --key=mail)
 fullname=$(ynh_user_get_info --username=$admin --key=fullname)
 password=$YNH_APP_ARG_PASSWORD
+salt_password=$(openssl passwd -1 -salt xyz $password)
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -117,6 +118,9 @@ phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
 
 # Adding the details of the database to the config file
 ynh_add_config --template="../conf/config.ini.php" --destination="$final_path/data/config.ini.php"
+
+chmod 400 "$final_path/data/config.ini.php"
+chown $app:$app "$final_path/data/config.ini.php"
 
 # Load initial SQL into the new database
 ynh_mysql_connect_as --user="$db_user" --password="$db_pwd" --database="$db_name" < "../conf/sql/webtrees.sql"
