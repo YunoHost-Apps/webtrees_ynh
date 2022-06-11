@@ -1,4 +1,4 @@
-; <?php return; ?> DO NOT DELETE THIS LINE
+; <?php exit; ?> DO NOT DELETE THIS LINE
 dbtype="mysql"
 dbhost="localhost"
 dbport="3306"
