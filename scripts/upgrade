@@ -85,17 +85,9 @@ ynh_script_progression --message="Upgrading source files..."
 if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..."
-	# Move old app dir
-	mv ${final_path} ${final_path}.old
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source "$final_path"
-
-	# restore data
-	cp -a ${final_path}.old/data ${final_path}
-
-	# delete temp directory
-	ynh_secure_remove --file=${final_path}.old
+	ynh_setup_source --dest_dir="$final_path" --keep="$final_path/data "
 fi
 
 chmod 750 "$final_path"
