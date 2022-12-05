@@ -23,8 +23,7 @@ Webtrees allows you to view and edit your genealogy on your website. It has full
 **Note:** Its better to upgrade from the Webtrees admin panel when new version arrives.
 
 
-**Shipped version:** 2.1.7~ynh1 *(:warning: This is the `testing` branch. The [`master` branch](https://github.com/YunoHost-Apps/webtrees_ynh/tree/master) used in the catalog is currently on version 2.1.6\~ynh1.)*
-
+**Shipped version:** 2.1.10~ynh1
 
 **Demo:** https://dev.webtrees.net/demo-stable/index.php?route=%2Fdemo-stable%2Ftree%2Fdemo
 
