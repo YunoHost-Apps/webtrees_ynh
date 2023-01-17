@@ -89,7 +89,7 @@ then
 	mv ${final_path} ${final_path}.old
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source "$final_path"
+	ynh_setup_source "$final_path" --keep="modules_v4/"
 
 	# restore data
 	cp -a ${final_path}.old/data ${final_path}
