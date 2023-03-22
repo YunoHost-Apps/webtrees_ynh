@@ -49,7 +49,7 @@ ynh_add_nginx_config
 ynh_script_progression --message="Configuring PHP-FPM..." 
 
 # Create a dedicated PHP-FPM config
-ynh_add_fpm_config
+ynh_add_fpm_config --usage=low --footprint=low
 
 #=================================================
 # MODIFY A CONFIG FILE
