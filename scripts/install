@@ -15,6 +15,13 @@ source /usr/share/yunohost/helpers
 
 password=$(ynh_string_random 24)
 admin_password=$(openssl passwd -1 -salt xyz $password)
+admin_username=$YNH_APP_ARG_USERNAME
+admin_name=$YNH_APP_ARG_NAME
+admin_email=$YNH_APP_ARG_EMAIL
+
+ynh_app_setting_set --app=$app --key=admin_username --value=$admin_username
+ynh_app_setting_set --app=$app --key=admin_name --value=$admin_name
+ynh_app_setting_set --app=$app --key=admin_email --value=$admin_email
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
