@@ -29,7 +29,7 @@ then
 	#mv ${install_dir} ${install_dir}.old
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source "$install_dir" --keep="data modules_v4"
+	ynh_setup_source "$install_dir" --keep="data"
 
 	# restore data
 	#cp -a ${install_dir}.old/data ${install_dir}
