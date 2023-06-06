@@ -50,11 +50,6 @@ ynh_script_progression --message="Upgrading NGINX web server configuration..."
 # Create a dedicated NGINX config
 ynh_add_nginx_config
 
-#=================================================
-# PHP-FPM CONFIGURATION
-#=================================================
-ynh_script_progression --message="Upgrading PHP-FPM configuration..."
-
 # Create a dedicated PHP-FPM config
 ynh_add_fpm_config --usage=low --footprint=low
 

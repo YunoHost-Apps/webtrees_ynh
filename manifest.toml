@@ -17,7 +17,7 @@ admindoc = "https://wiki.webtrees.net"
 code = "https://github.com/fisharebest/webtrees"
 
 [integration]
-yunohost = ">= 11.1.18"
+yunohost = ">= 11.1.19"
 architectures = "all"
 multi_instance = true
 ldap = false
