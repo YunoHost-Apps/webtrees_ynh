@@ -1,0 +1,6 @@
+Webtrees vous permet de visualiser et de modifier votre généalogie sur votre site Web. Il dispose de capacités d'édition complètes, de fonctions de confidentialité complètes et prend en charge les imedia tels que les photos et les images de documents. En tant que programme en ligne, il favorise la participation de la famille élargie et les bonnes habitudes d'enregistrement ancestrales, car il simplifie le processus de collaboration avec d'autres personnes travaillant sur vos lignées familiales. Vos dernières informations sont toujours sur votre site Web et accessibles aux autres, définies par les règles d'affichage que vous avez définies.
+
+- Il fonctionne à partir de fichiers GEDCOM standard et est donc compatible avec toutes les principales applications de bureau.
+- Il vise à être efficient et efficace en utilisant la bonne combinaison d'outils tiers, de techniques de conception et de normes ouvertes.
+
+**Remarque :** Il est préférable de mettre à niveau à partir du panneau d'administration Webtrees lorsqu'une nouvelle version arrive.

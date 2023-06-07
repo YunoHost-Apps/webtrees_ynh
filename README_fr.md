@@ -16,15 +16,14 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 ## Vue d’ensemble
 
-Webtrees allows you to view and edit your genealogy on your website. It has full editing capabilities, full privacy functions, and supports imedia such as photos and document images. As an online program, it fosters extended family participation and good ancestral recording habits, as it simplifies the process of collaborating with others working on your family lines. Your latest information is always on your web site and available for others to see, defined by viewing rules you set.
+Webtrees vous permet de visualiser et de modifier votre généalogie sur votre site Web. Il dispose de capacités d'édition complètes, de fonctions de confidentialité complètes et prend en charge les imedia tels que les photos et les images de documents. En tant que programme en ligne, il favorise la participation de la famille élargie et les bonnes habitudes d'enregistrement ancestrales, car il simplifie le processus de collaboration avec d'autres personnes travaillant sur vos lignées familiales. Vos dernières informations sont toujours sur votre site Web et accessibles aux autres, définies par les règles d'affichage que vous avez définies.
 
-- It works from standard GEDCOM files, and is therefore compatible with every major desktop application.
-- It aims to to be efficient and effective by using the right combination of third-party tools, design techniques and open standards.
+- Il fonctionne à partir de fichiers GEDCOM standard et est donc compatible avec toutes les principales applications de bureau.
+- Il vise à être efficient et efficace en utilisant la bonne combinaison d'outils tiers, de techniques de conception et de normes ouvertes.
 
-**Note:** Its better to upgrade from the Webtrees admin panel when new version arrives.
+**Remarque :** Il est préférable de mettre à niveau à partir du panneau d'administration Webtrees lorsqu'une nouvelle version arrive.
 
-
-**Version incluse :** 2.1.16~ynh1
+**Version incluse :** 2.1.16~ynh2
 
 **Démo :** https://dev.webtrees.net/demo-stable/index.php?route=%2Fdemo-stable%2Ftree%2Fdemo
 
