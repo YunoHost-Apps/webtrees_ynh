@@ -13,8 +13,8 @@ source /usr/share/yunohost/helpers
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
-password=$(ynh_string_random 24)
-admin_password=$(openssl passwd -1 -salt xyz $password)
+admin_password=$(ynh_string_random 24)
+admin_password_hashed=$(mkpasswd -m md5crypt --stdin <<< "$admin_password")
 admin_username=$YNH_APP_ARG_USERNAME
 admin_name=$YNH_APP_ARG_NAME
 admin_email=$YNH_APP_ARG_EMAIL
@@ -22,6 +22,7 @@ admin_email=$YNH_APP_ARG_EMAIL
 ynh_app_setting_set --app=$app --key=admin_username --value=$admin_username
 ynh_app_setting_set --app=$app --key=admin_name --value=$admin_name
 ynh_app_setting_set --app=$app --key=admin_email --value=$admin_email
+ynh_app_setting_set --app=$app --key=admin_password --value=$admin_password
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -65,7 +66,7 @@ ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/webtrees.sql
 ynh_replace_string --match_string="__USER_NAME__"  --replace_string="$admin_username" --target_file="../conf/sql/admin.sql"
 ynh_replace_string --match_string="__NAME__"       --replace_string="$admin_name"     --target_file="../conf/sql/admin.sql"
 ynh_replace_string --match_string="__USER_EMAIL__" --replace_string="$admin_email"    --target_file="../conf/sql/admin.sql"
-ynh_replace_string --match_string="__PASSWORD__"   --replace_string="$admin_password" --target_file="../conf/sql/admin.sql"
+ynh_replace_string --match_string="__ADMIN_PASSWORD_HASHED__"   --replace_string="$admin_password_hashed" --target_file="../conf/sql/admin.sql"
 
 ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/admin.sql"
 
