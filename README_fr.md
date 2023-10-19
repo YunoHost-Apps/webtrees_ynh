@@ -23,7 +23,7 @@ Webtrees vous permet de visualiser et de modifier votre généalogie sur votre s
 
 **Remarque :** Il est préférable de mettre à niveau à partir du panneau d'administration Webtrees lorsqu'une nouvelle version arrive.
 
-**Version incluse :** 2.1.17~ynh1
+**Version incluse :** 2.1.18~ynh1
 
 **Démo :** https://dev.webtrees.net/demo-stable/index.php?route=%2Fdemo-stable%2Ftree%2Fdemo
 
