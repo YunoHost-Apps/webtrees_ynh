@@ -23,7 +23,7 @@ Webtrees vous permet de visualiser et de modifier votre généalogie sur votre s
 
 **Remarque :** Il est préférable de mettre à niveau à partir du panneau d'administration Webtrees lorsqu'une nouvelle version arrive.
 
-**Version incluse :** 2.1.17~ynh1
+**Version incluse :** 2.1.18~ynh1
 
 **Démo :** https://dev.webtrees.net/demo-stable/index.php?route=%2Fdemo-stable%2Ftree%2Fdemo
 
@@ -36,7 +36,6 @@ Webtrees vous permet de visualiser et de modifier votre généalogie sur votre s
 * Site officiel de l’app : <https://www.webtrees.net>
 * Documentation officielle de l’admin : <https://wiki.webtrees.net>
 * Dépôt de code officiel de l’app : <https://github.com/fisharebest/webtrees>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_webtrees>
 * Signaler un bug : <https://github.com/YunoHost-Apps/webtrees_ynh/issues>
 
 ## Informations pour les développeurs
