@@ -36,7 +36,6 @@ Webtrees vous permet de visualiser et de modifier votre généalogie sur votre s
 * Site officiel de l’app : <https://www.webtrees.net>
 * Documentation officielle de l’admin : <https://wiki.webtrees.net>
 * Dépôt de code officiel de l’app : <https://github.com/fisharebest/webtrees>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_webtrees>
 * Signaler un bug : <https://github.com/YunoHost-Apps/webtrees_ynh/issues>
 
 ## Informations pour les développeurs
