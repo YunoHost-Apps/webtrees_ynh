@@ -5,7 +5,7 @@ name = "Webtrees"
 description.en = "Web-based genealogy application"
 description.fr = "Logiciel libre de généalogie en ligne"
 
-version = "2.1.17~ynh1"
+version = "2.1.18~ynh1"
 
 maintainers = []
 
