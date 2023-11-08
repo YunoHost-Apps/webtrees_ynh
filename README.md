@@ -24,7 +24,7 @@ Webtrees allows you to view and edit your genealogy on your website. It has full
 **Note:** Its better to upgrade from the Webtrees admin panel when new version arrives.
 
 
-**Shipped version:** 2.1.18~ynh1
+**Shipped version:** 2.1.18~ynh2
 
 **Demo:** https://dev.webtrees.net/demo-stable/index.php?route=%2Fdemo-stable%2Ftree%2Fdemo
 
