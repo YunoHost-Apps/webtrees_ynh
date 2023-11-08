@@ -31,7 +31,6 @@ then
 	# Download, check integrity, uncompress and patch the source from app.src
 	ynh_setup_source --dest_dir=$install_dir --keep="data modules_v4"
 	
-
 	# restore data
 	#cp -a ${install_dir}.old/data ${install_dir}
 
@@ -52,7 +51,7 @@ ynh_script_progression --message="Upgrading NGINX web server configuration..."
 ynh_add_nginx_config
 
 # Create a dedicated PHP-FPM config
-ynh_add_fpm_config --usage=low --footprint=low
+ynh_add_fpm_config
 
 #=================================================
 # END OF SCRIPT

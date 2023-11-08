@@ -45,17 +45,17 @@ ynh_script_progression --message="Configuring NGINX web server..."
 ynh_add_nginx_config
 
 # Create a dedicated PHP-FPM config
-ynh_add_fpm_config --usage=low --footprint=low
+ynh_add_fpm_config
 
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
 
 # Adding the details of the database to the config file
-ynh_add_config --template="../conf/config.ini.php" --destination="$install_dir/data/config.ini.php"
+ynh_add_config --template="config.ini.php" --destination="$install_dir/data/config.ini.php"
 
 # Load initial SQL into the new database
-ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/webtrees.sql"
+ynh_mysql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "../conf/sql/webtrees.sql"
 
 # Replace variables in sql scripts
 ynh_replace_string --match_string="__USER_NAME__" --replace_string="$admin_username" --target_file="../conf/sql/admin.sql"
@@ -63,7 +63,7 @@ ynh_replace_string --match_string="__NAME__" --replace_string="$admin_name" --ta
 ynh_replace_string --match_string="__USER_EMAIL__" --replace_string="$admin_email" --target_file="../conf/sql/admin.sql"
 ynh_replace_string --match_string="__ADMIN_PASSWORD_HASHED__" --replace_string="$admin_password_hashed" --target_file="../conf/sql/admin.sql"
 
-ynh_mysql_connect_as "$db_name" "$db_pwd" "$db_name" < "../conf/sql/admin.sql"
+ynh_mysql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "../conf/sql/admin.sql"
 
 #=================================================
 # END OF SCRIPT
