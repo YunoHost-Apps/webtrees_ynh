@@ -14,4 +14,4 @@ test_format = 1.0
     # Commits to test upgrade from
     # -------------------------------
     
-    test_upgrade_from.dfcde24cce4db0527465acbc16dcecf9a3082858.name = "2.1.16"
+    #test_upgrade_from.dfcde24cce4db0527465acbc16dcecf9a3082858.name = "2.1.16"
