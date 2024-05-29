@@ -63,6 +63,7 @@ ram.runtime = "50M"
         url = "https://github.com/fisharebest/webtrees/releases/download/2.1.18/webtrees-2.1.18.zip"
         sha256 = "33808c8c39df9ff6120ddf55741638bb0287c6617527157abe8786aaa7c30ea2"
         autoupdate.strategy = "latest_github_tag"
+        autoupdate.asset = "*.zip"
 
     [resources.system_user]
 
