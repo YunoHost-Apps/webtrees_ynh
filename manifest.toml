@@ -60,8 +60,8 @@ ram.runtime = "50M"
 
 [resources]
         [resources.sources.main]
-        url = "https://github.com/fisharebest/webtrees/archive/refs/tags/2.1.20.tar.gz"
-        sha256 = "97f140886f6c0cb3a5d3b6ca2757dbe4e8cf63d26e96b97d98240cfa7f5fa1dd"
+        url = "https://github.com/fisharebest/webtrees/releases/download/2.1.20/webtrees-2.1.20.zip"
+        sha256 = "0e2f9ccf601e5d4579ef90d727b1630620bc22b9ef66c4aacbaf7329b3c7b49d"
         autoupdate.strategy = "latest_github_tag"
 
     [resources.system_user]
@@ -72,7 +72,7 @@ ram.runtime = "50M"
     main.url = "/"
 
     [resources.apt]
-    packages = "mariadb-server, php8.2-mbstring, php8.2-mysql, php8.2-zip, php8.2-gd, php8.2-xml, php8.2-curl, php8.2-intl, mailutils"
+    packages = "mariadb-server, php8.3-mbstring, php8.3-mysql, php8.3-zip, php8.3-gd, php8.3-xml, php8.3-curl, php8.3-intl, mailutils"
 
     [resources.database]
     type = "mysql"
