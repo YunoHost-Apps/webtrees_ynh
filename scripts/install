@@ -1,8 +1,6 @@
 #!/bin/bash
 
 #=================================================
-# GENERIC START
-#=================================================
 # IMPORT GENERIC HELPERS
 #=================================================
 
@@ -10,19 +8,13 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# RETRIEVE ARGUMENTS FROM THE MANIFEST
+# INITIALIZE AND STORE SETTINGS
 #=================================================
 
 admin_password=$(ynh_string_random 24)
 admin_password_hashed=$(mkpasswd -m md5crypt --stdin <<< "$admin_password")
-admin_username=$YNH_APP_ARG_USERNAME
-admin_name=$YNH_APP_ARG_NAME
-admin_email=$YNH_APP_ARG_EMAIL
 
-ynh_app_setting_set --app=$app --key=admin_username --value=$admin_username
-ynh_app_setting_set --app=$app --key=admin_name --value=$admin_name
-ynh_app_setting_set --app=$app --key=admin_email --value=$admin_email
-ynh_app_setting_set --app=$app --key=admin_password --value=$admin_password
+ynh_app_setting_set --app="$app" --key="admin_password" --value="$admin_password"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -32,38 +24,38 @@ ynh_script_progression --message="Setting up source files..."
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$install_dir"
 
-chmod -R 700 $install_dir/data
+chmod -R 700 "$install_dir/data"
 chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
+chown -R "$app:www-data" "$install_dir"
 
 #=================================================
-# NGINX CONFIGURATION
+# APP INITIAL CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring NGINX web server..."
+ynh_script_progression --message="Adding $app's configuration files..." --weight=1
+
+# Adding the details of the database to the config file
+ynh_add_config --template="config.ini.php" --destination="$install_dir/data/config.ini.php"
+
+# Load initial SQL into the new database
+ynh_add_config --template="sql/webtrees.sql" --destination="$install_dir/webtrees.sql"
+ynh_add_config --template="sql/admin.sql" --destination="$install_dir/admin.sql"
+
+ynh_mysql_connect_as --user="$db_user" --password="$db_pwd" --database="$db_name" < "$install_dir/webtrees.sql"
+ynh_mysql_connect_as --user="$db_user" --password="$db_pwd" --database="$db_name" < "$install_dir/admin.sql"
+
+ynh_secure_remove --file="$install_dir/webtrees.sql"
+ynh_secure_remove --file="$install_dir/admin.sql"
+
+#=================================================
+# SYSTEM CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding system configurations related to $app..." --weight=1
 
 # Create a dedicated NGINX config
 ynh_add_nginx_config
 
 # Create a dedicated PHP-FPM config
 ynh_add_fpm_config
-
-#=================================================
-# MODIFY A CONFIG FILE
-#=================================================
-
-# Adding the details of the database to the config file
-ynh_add_config --template="config.ini.php" --destination="$install_dir/data/config.ini.php"
-
-# Load initial SQL into the new database
-ynh_mysql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "../conf/sql/webtrees.sql"
-
-# Replace variables in sql scripts
-ynh_replace_string --match_string="__USER_NAME__" --replace_string="$admin_username" --target_file="../conf/sql/admin.sql"
-ynh_replace_string --match_string="__NAME__" --replace_string="$admin_name" --target_file="../conf/sql/admin.sql"
-ynh_replace_string --match_string="__USER_EMAIL__" --replace_string="$admin_email" --target_file="../conf/sql/admin.sql"
-ynh_replace_string --match_string="__ADMIN_PASSWORD_HASHED__" --replace_string="$admin_password_hashed" --target_file="../conf/sql/admin.sql"
-
-ynh_mysql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "../conf/sql/admin.sql"
 
 #=================================================
 # END OF SCRIPT

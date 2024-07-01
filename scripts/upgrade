@@ -1,8 +1,6 @@
 #!/bin/bash
 
 #=================================================
-# GENERIC START
-#=================================================
 # IMPORT GENERIC HELPERS
 #=================================================
 
@@ -10,23 +8,51 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# CHECK THE PATH
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
+ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
+
+# Migrate manifest questions
+if [ -z "$admin_username" ]; then
+    admin_username="$username"
+    ynh_app_setting_set --app="$app" --key="admin_username" --value="$admin_username"
+fi
+if [ -n "$username" ]; then
+    ynh_app_setting_delete --app="$app" --key="username"
+fi
+
+if [ -z "$admin_name" ]; then
+    admin_name="$name"
+    ynh_app_setting_set --app="$app" --key="admin_name" --value="$admin_name"
+fi
+if [ -n "$name" ]; then
+    ynh_app_setting_delete --app="$app" --key="name"
+fi
+
+if [ -z "$admin_email" ]; then
+    admin_email="$email"
+    ynh_app_setting_set --app="$app" --key="admin_email" --value="$admin_email"
+fi
+if [ -n "$email" ]; then
+    ynh_app_setting_delete --app="$app" --key="email"
+fi
+
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Upgrading source files..."
 
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source --dest_dir=$install_dir --keep="data modules_v4"
+ynh_setup_source --dest_dir="$install_dir" --full_replace=1 --keep="data modules_v4"
 
-chmod -R 700 $install_dir/data
+chmod -R 700 "$install_dir/data"
 chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
+chown -R "$app:www-data" "$install_dir"
 
 #=================================================
-# NGINX CONFIGURATION
+# REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression --message="Upgrading NGINX web server configuration..."
+ynh_script_progression --message="Upgrading system configurations related to $app..." --weight=1
 
 # Create a dedicated NGINX config
 ynh_add_nginx_config

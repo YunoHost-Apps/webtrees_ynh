@@ -1,3 +1,5 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/manifest.v2.schema.json
+
 packaging_format = 2
 
 id = "webtrees"
@@ -34,19 +36,19 @@ ram.runtime = "50M"
     type = "path"
     default = "/webtrees"
 
-    [install.username]
+    [install.admin_username]
     ask.en = "Choose an admin username (Not a LDAP User)"
     ask.fr = "Choisissez un nom d'utilisateur pour l'administrateur de Webtrees (ne doit pas être un utilisateur YunoHost existant)"
     type = "string"
     example = "john"
 
-    [install.name]
+    [install.admin_name]
     ask.en = "Name of the user (Not a LDAP User)"
     ask.fr = "Nom de cet utilisateur"
     type = "string"
     example = "john doe"
 
-    [install.email]
+    [install.admin_email]
     ask.en = "Admin email (All the new registration will be sent on this email)"
     ask.fr = "Adresse email de l'administrateur (Toutes les nouvelles inscriptions seront envoyées à cette adresse)"
     type = "string"
@@ -73,7 +75,17 @@ ram.runtime = "50M"
     main.url = "/"
 
     [resources.apt]
-    packages = "mariadb-server, php8.3-mbstring, php8.3-mysql, php8.3-zip, php8.3-gd, php8.3-xml, php8.3-curl, php8.3-intl, mailutils"
+    packages = [
+        "mariadb-server",
+        "php8.3-mbstring",
+        "php8.3-mysql",
+        "php8.3-zip",
+        "php8.3-gd",
+        "php8.3-xml",
+        "php8.3-curl",
+        "php8.3-intl",
+        "mailutils",
+    ]
 
     [resources.database]
     type = "mysql"
