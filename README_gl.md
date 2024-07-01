@@ -5,7 +5,7 @@ NON debe editarse manualmente.
 
 # Webtrees para YunoHost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/webtrees.svg)](https://dash.yunohost.org/appci/app/webtrees) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/webtrees.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/webtrees.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/webtrees.svg)](https://ci-apps.yunohost.org/ci/apps/webtrees/) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/webtrees.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/webtrees.maintain.svg)
 
 [![Instalar Webtrees con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=webtrees)
 
