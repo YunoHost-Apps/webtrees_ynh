@@ -6,7 +6,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
-ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
+ynh_script_progression "Ensuring downward compatibility..."
 
 # Migrate manifest questions
 if [ -z "${admin_username:-}" ]; then
