@@ -13,27 +13,27 @@ source /usr/share/yunohost/helpers
 ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
 
 # Migrate manifest questions
-if [ -z "$admin_username" ]; then
+if [ -z "${admin_username:-}" ]; then
     admin_username="$username"
     ynh_app_setting_set --app="$app" --key="admin_username" --value="$admin_username"
 fi
-if [ -n "$username" ]; then
+if [ -n "${username:-}" ]; then
     ynh_app_setting_delete --app="$app" --key="username"
 fi
 
-if [ -z "$admin_name" ]; then
+if [ -z "${admin_name:-}" ]; then
     admin_name="$name"
     ynh_app_setting_set --app="$app" --key="admin_name" --value="$admin_name"
 fi
-if [ -n "$name" ]; then
+if [ -n "${name:-}" ]; then
     ynh_app_setting_delete --app="$app" --key="name"
 fi
 
-if [ -z "$admin_email" ]; then
+if [ -z "${admin_email:-}" ]; then
     admin_email="$email"
     ynh_app_setting_set --app="$app" --key="admin_email" --value="$admin_email"
 fi
-if [ -n "$email" ]; then
+if [ -n "${email:-}" ]; then
     ynh_app_setting_delete --app="$app" --key="email"
 fi
 
