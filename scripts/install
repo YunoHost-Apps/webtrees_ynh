@@ -40,8 +40,8 @@ ynh_config_add --template="sql/admin.sql" --destination="$install_dir/admin.sql"
 ynh_mysql_db_shell < "$install_dir/webtrees.sql"
 ynh_mysql_db_shell < "$install_dir/admin.sql"
 
-ynh_secure_remove --file="$install_dir/webtrees.sql"
-ynh_secure_remove --file="$install_dir/admin.sql"
+ynh_safe-rm --file="$install_dir/webtrees.sql"
+ynh_safe-rm --file="$install_dir/admin.sql"
 
 #=================================================
 # SYSTEM CONFIGURATION
