@@ -36,7 +36,7 @@ Webtrees allows you to view and edit your genealogy on your website. It has full
 
 - Website aplikasi resmi: <https://www.webtrees.net>
 - Dokumentasi admin resmi: <https://wiki.webtrees.net>
-- Repositori kode aplikasi hulu: <https://github.com/fisharebest/webtrees>
+- Depot kode aplikasi hulu: <https://github.com/fisharebest/webtrees>
 - Gudang YunoHost: <https://apps.yunohost.org/app/webtrees>
 - Laporkan bug: <https://github.com/YunoHost-Apps/webtrees_ynh/issues>
 
