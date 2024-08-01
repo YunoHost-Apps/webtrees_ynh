@@ -1,46 +1,34 @@
 #!/bin/bash
 
-#=================================================
-# IMPORT GENERIC HELPERS
-#=================================================
-
 source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
-ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
+ynh_script_progression "Ensuring downward compatibility..."
 
 # Migrate manifest questions
-if [ -z "${admin_username:-}" ]; then
-    admin_username="$username"
-    ynh_app_setting_set --app="$app" --key="admin_username" --value="$admin_username"
-fi
+ynh_app_setting_set_default --key=admin_username --value=$username
+ynh_app_setting_set_default --key=admin_name --value=$name
+ynh_app_setting_set_default --key=admin_email --value=$email
+
 if [ -n "${username:-}" ]; then
-    ynh_app_setting_delete --app="$app" --key="username"
+    ynh_app_setting_delete --app="$app" --key="admin_username"
 fi
 
-if [ -z "${admin_name:-}" ]; then
-    admin_name="$name"
-    ynh_app_setting_set --app="$app" --key="admin_name" --value="$admin_name"
-fi
 if [ -n "${name:-}" ]; then
-    ynh_app_setting_delete --app="$app" --key="name"
+    ynh_app_setting_delete --app="$app" --key="admin_name"
 fi
 
-if [ -z "${admin_email:-}" ]; then
-    admin_email="$email"
-    ynh_app_setting_set --app="$app" --key="admin_email" --value="$admin_email"
-fi
 if [ -n "${email:-}" ]; then
-    ynh_app_setting_delete --app="$app" --key="email"
+    ynh_app_setting_delete --app="$app" --key="admin_email"
 fi
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_script_progression --message="Upgrading source files..."
+ynh_script_progression "Upgrading source files..."
 
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$install_dir" --full_replace=1 --keep="data modules_v4"
@@ -52,16 +40,16 @@ chown -R "$app:www-data" "$install_dir"
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression --message="Upgrading system configurations related to $app..." --weight=1
+ynh_script_progression "Upgrading system configurations related to $app..."
 
 # Create a dedicated NGINX config
-ynh_add_nginx_config
+ynh_config_add_nginx
 
 # Create a dedicated PHP-FPM config
-ynh_add_fpm_config
+ynh_config_add_phpfpm
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Upgrade of $app completed" --last
+ynh_script_progression "Upgrade of $app completed"
