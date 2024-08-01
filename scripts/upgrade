@@ -14,15 +14,15 @@ ynh_app_setting_set_default --key=admin_name --value=$name
 ynh_app_setting_set_default --key=admin_email --value=$email
 
 if [ -n "${username:-}" ]; then
-    ynh_app_setting_delete --app="$app" --key="username"
+    ynh_app_setting_delete --app="$app" --key="admin_username"
 fi
 
 if [ -n "${name:-}" ]; then
-    ynh_app_setting_delete --app="$app" --key="name"
+    ynh_app_setting_delete --app="$app" --key="admin_name"
 fi
 
 if [ -n "${email:-}" ]; then
-    ynh_app_setting_delete --app="$app" --key="email"
+    ynh_app_setting_delete --app="$app" --key="admin_email"
 fi
 
 #=================================================
