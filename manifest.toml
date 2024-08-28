@@ -55,8 +55,6 @@ ram.runtime = "50M"
     example = "admin@example.com"
 
     [install.init_main_permission]
-    help.en = "If checked, Webtrees will be public"
-    help.fr = "Si cochée, Webtrees sera publique"
     type = "group"
     default = "visitors"
 
