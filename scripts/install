@@ -10,7 +10,7 @@ source /usr/share/yunohost/helpers
 admin_password=$(ynh_string_random --length=24)
 admin_password_hashed=$(mkpasswd -m md5crypt --stdin <<< "$admin_password")
 
-ynh_app_setting_set --app="$app" --key="admin_password" --value="$admin_password"
+ynh_app_setting_set --key="admin_password" --value="$admin_password"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -21,9 +21,8 @@ ynh_script_progression "Setting up source files..."
 ynh_setup_source --dest_dir="$install_dir"
 
 chmod -R 700 "$install_dir/data"
-chmod -R o-rwx "$install_dir"
-chown -R "$app:www-data" "$install_dir"
-
+#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
+#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R "$app:www-data" "$install_dir"
 #=================================================
 # APP INITIAL CONFIGURATION
 #=================================================
@@ -36,12 +35,11 @@ ynh_config_add --template="config.ini.php" --destination="$install_dir/data/conf
 ynh_config_add --template="sql/webtrees.sql" --destination="$install_dir/webtrees.sql"
 ynh_config_add --template="sql/admin.sql" --destination="$install_dir/admin.sql"
 
-# Load initial SQL into the new database
 ynh_mysql_db_shell < "$install_dir/webtrees.sql"
 ynh_mysql_db_shell < "$install_dir/admin.sql"
 
-ynh_safe_rm --file="$install_dir/webtrees.sql"
-ynh_safe_rm --file="$install_dir/admin.sql"
+ynh_safe_rm "$install_dir/webtrees.sql"
+ynh_safe_rm "$install_dir/admin.sql"
 
 #=================================================
 # SYSTEM CONFIGURATION
