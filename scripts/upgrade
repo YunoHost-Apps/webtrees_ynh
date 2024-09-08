@@ -13,29 +13,20 @@ source /usr/share/yunohost/helpers
 ynh_script_progression "Ensuring downward compatibility..."
 
 # Migrate manifest questions
-# FIXMEhelpers2.1: maybe replace with: ynh_app_setting_set_default --key=admin_username --value="$username"
-if [ -z "${admin_username:-}" ]; then
-    admin_username="$username"
-    ynh_app_setting_set --key="admin_username" --value="$admin_username"
-fi
+ynh_app_setting_set_default --key=admin_username --value="$username"
+
 if [ -n "${username:-}" ]; then
     ynh_app_setting_delete --key="username"
 fi
 
-# FIXMEhelpers2.1: maybe replace with: ynh_app_setting_set_default --key=admin_name --value="$name"
-if [ -z "${admin_name:-}" ]; then
-    admin_name="$name"
-    ynh_app_setting_set --key="admin_name" --value="$admin_name"
-fi
+ynh_app_setting_set_default --key=admin_name --value="$name"
+
 if [ -n "${name:-}" ]; then
     ynh_app_setting_delete --key="name"
 fi
 
-# FIXMEhelpers2.1: maybe replace with: ynh_app_setting_set_default --key=admin_email --value="$email"
-if [ -z "${admin_email:-}" ]; then
-    admin_email="$email"
-    ynh_app_setting_set --key="admin_email" --value="$admin_email"
-fi
+ynh_app_setting_set_default --key=admin_email --value="$email"
+
 if [ -n "${email:-}" ]; then
     ynh_app_setting_delete --key="email"
 fi
@@ -45,21 +36,17 @@ fi
 #=================================================
 ynh_script_progression "Upgrading source files..."
 
-# Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$install_dir" --full_replace --keep="data modules_v4"
 
 chmod -R 700 "$install_dir/data"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R "$app:www-data" "$install_dir"
+
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
 ynh_script_progression "Upgrading system configurations related to $app..."
 
-# Create a dedicated NGINX config
 ynh_config_add_nginx
 
-# Create a dedicated PHP-FPM config
 ynh_config_add_phpfpm
 
 #=================================================
