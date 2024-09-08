@@ -19,7 +19,7 @@ admindoc = "https://wiki.webtrees.net"
 code = "https://github.com/fisharebest/webtrees"
 
 [integration]
-yunohost = ">= 11.2.18"
+yunohost = ">= 11.2.30"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = true
