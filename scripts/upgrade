@@ -8,29 +8,15 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression "Ensuring downward compatibility..."
 
-# Migrate manifest questions
 ynh_app_setting_set_default --key=admin_username --value=$username
 ynh_app_setting_set_default --key=admin_name --value=$name
 ynh_app_setting_set_default --key=admin_email --value=$email
-
-if [ -n "${username:-}" ]; then
-    ynh_app_setting_delete --app="$app" --key="admin_username"
-fi
-
-if [ -n "${name:-}" ]; then
-    ynh_app_setting_delete --app="$app" --key="admin_name"
-fi
-
-if [ -n "${email:-}" ]; then
-    ynh_app_setting_delete --app="$app" --key="admin_email"
-fi
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression "Upgrading source files..."
 
-# Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$install_dir" --full_replace --keep="data modules_v4"
 
 chmod -R 700 "$install_dir/data"
@@ -40,10 +26,8 @@ chmod -R 700 "$install_dir/data"
 #=================================================
 ynh_script_progression "Upgrading system configurations related to $app..."
 
-# Create a dedicated NGINX config
 ynh_config_add_nginx
 
-# Create a dedicated PHP-FPM config
 ynh_config_add_phpfpm
 
 #=================================================
