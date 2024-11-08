@@ -12,8 +12,15 @@ test_format = 1.0
     args.admin_name = "john"
     args.admin_email = "admin@example.com"
 
+    args.username = "john"
+    args.name = "john"
+    args.email = "admin@example.com"
+
     # -------------------------------
     # Commits to test upgrade from
     # -------------------------------
 
-    test_upgrade_from.9f28316.name = "helpers v1"
+    test_upgrade_from.81df5a1.name = "helpers v1"
+    test_upgrade_from.81df5a1.args.username = "john"
+    test_upgrade_from.81df5a1.args.name = "john"
+    test_upgrade_from.81df5a1.args.email = "admin@example.com"
