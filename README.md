@@ -5,7 +5,9 @@ It shall NOT be edited by hand.
 
 # Webtrees for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/webtrees.svg)](https://ci-apps.yunohost.org/ci/apps/webtrees/) ![Working status](https://ci-apps.yunohost.org/ci/badges/webtrees.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/webtrees.maintain.svg)
+[![Integration level](https://apps.yunohost.org/badge/integration/webtrees)](https://ci-apps.yunohost.org/ci/apps/webtrees/)
+![Working status](https://apps.yunohost.org/badge/state/webtrees)
+![Maintenance status](https://apps.yunohost.org/badge/maintained/webtrees)
 
 [![Install Webtrees with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=webtrees)
 
@@ -24,7 +26,7 @@ Webtrees allows you to view and edit your genealogy on your website. It has full
 **Note:** Its better to upgrade from the Webtrees admin panel when new version arrives.
 
 
-**Shipped version:** 2.1.20~ynh1
+**Shipped version:** 2.2.0~ynh1
 
 **Demo:** <https://dev.webtrees.net/demo-stable/index.php?route=%2Fdemo-stable%2Ftree%2Fdemo>
 
