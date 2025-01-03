@@ -5,7 +5,9 @@
 
 # YunoHost 上的 Webtrees
 
-[![集成程度](https://dash.yunohost.org/integration/webtrees.svg)](https://ci-apps.yunohost.org/ci/apps/webtrees/) ![工作状态](https://ci-apps.yunohost.org/ci/badges/webtrees.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/webtrees.maintain.svg)
+[![集成程度](https://apps.yunohost.org/badge/integration/webtrees)](https://ci-apps.yunohost.org/ci/apps/webtrees/)
+![工作状态](https://apps.yunohost.org/badge/state/webtrees)
+![维护状态](https://apps.yunohost.org/badge/maintained/webtrees)
 
 [![使用 YunoHost 安装 Webtrees](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=webtrees)
 
@@ -24,7 +26,7 @@ Webtrees allows you to view and edit your genealogy on your website. It has full
 **Note:** Its better to upgrade from the Webtrees admin panel when new version arrives.
 
 
-**分发版本：** 2.1.20~ynh1
+**分发版本：** 2.2.1~ynh1
 
 **演示：** <https://dev.webtrees.net/demo-stable/index.php?route=%2Fdemo-stable%2Ftree%2Fdemo>
 
