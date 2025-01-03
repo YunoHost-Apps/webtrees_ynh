@@ -7,7 +7,7 @@ name = "Webtrees"
 description.en = "Web-based genealogy application"
 description.fr = "Logiciel libre de généalogie en ligne"
 
-version = "2.1.20~ynh1"
+version = "2.2.1~ynh1"
 
 maintainers = []
 
@@ -19,11 +19,14 @@ admindoc = "https://wiki.webtrees.net"
 code = "https://github.com/fisharebest/webtrees"
 
 [integration]
-yunohost = ">= 11.2"
+yunohost = ">= 11.2.30"
+helpers_version = "2.1"
 architectures = "all"
 multi_instance = true
+
 ldap = false
 sso = false
+
 disk = "50M"
 ram.build = "100M"
 ram.runtime = "50M"
@@ -55,21 +58,20 @@ ram.runtime = "50M"
     example = "admin@example.com"
 
     [install.init_main_permission]
-    help.en = "If checked, Webtrees will be public"
-    help.fr = "Si cochée, Webtrees sera publique"
     type = "group"
     default = "visitors"
 
 [resources]
         [resources.sources.main]
-        url = "https://github.com/fisharebest/webtrees/releases/download/2.1.20/webtrees-2.1.20.zip"
-        sha256 = "0e2f9ccf601e5d4579ef90d727b1630620bc22b9ef66c4aacbaf7329b3c7b49d"
-        autoupdate.strategy = "latest_github_tag"
-        autoupdate.asset = "*.zip"
+        url = "https://github.com/fisharebest/webtrees/releases/download/2.2.1/webtrees-2.2.1.zip"
+        sha256 = "f500d7e839441a71cae10d8c81bb7f6c4753e3885b40f3d954f575971e27ef42"
+        autoupdate.strategy = "latest_github_release"
+        autoupdate.asset = ".*.zip"
 
     [resources.system_user]
 
     [resources.install_dir]
+    group = "www-data:r-x"
 
     [resources.permissions]
     main.url = "/"
