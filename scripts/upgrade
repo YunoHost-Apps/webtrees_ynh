@@ -8,9 +8,9 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression "Ensuring downward compatibility..."
 
-ynh_app_setting_set_default --key=admin_username --value=$username
-ynh_app_setting_set_default --key=admin_name --value=$name
-ynh_app_setting_set_default --key=admin_email --value=$email
+ynh_app_setting_set_default --key=admin_username --value="${username:-}"
+ynh_app_setting_set_default --key=admin_name --value="${name:-}"
+ynh_app_setting_set_default --key=admin_email --value="${email:-}"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
