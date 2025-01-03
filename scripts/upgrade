@@ -1,9 +1,5 @@
 #!/bin/bash
 
-#=================================================
-# IMPORT GENERIC HELPERS
-#=================================================
-
 source _common.sh
 source /usr/share/yunohost/helpers
 
@@ -12,24 +8,9 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression "Ensuring downward compatibility..."
 
-# Migrate manifest questions
-ynh_app_setting_set_default --key=admin_username --value="$username"
-
-if [ -n "${username:-}" ]; then
-    ynh_app_setting_delete --key="username"
-fi
-
-ynh_app_setting_set_default --key=admin_name --value="$name"
-
-if [ -n "${name:-}" ]; then
-    ynh_app_setting_delete --key="name"
-fi
-
-ynh_app_setting_set_default --key=admin_email --value="$email"
-
-if [ -n "${email:-}" ]; then
-    ynh_app_setting_delete --key="email"
-fi
+ynh_app_setting_set_default --key=admin_username --value=$username
+ynh_app_setting_set_default --key=admin_name --value=$name
+ynh_app_setting_set_default --key=admin_email --value=$email
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

@@ -1,9 +1,5 @@
 #!/bin/bash
 
-#=================================================
-# IMPORT GENERIC HELPERS
-#=================================================
-
 source _common.sh
 source /usr/share/yunohost/helpers
 
@@ -30,7 +26,6 @@ chmod -R 700 "$install_dir/data"
 #=================================================
 ynh_script_progression "Adding $app's configuration files..."
 
-# Adding the details of the database to the config file
 ynh_config_add --template="config.ini.php" --destination="$install_dir/data/config.ini.php"
 
 # Load initial SQL into the new database
