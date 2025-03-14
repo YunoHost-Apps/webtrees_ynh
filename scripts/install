@@ -29,14 +29,14 @@ ynh_script_progression "Adding $app's configuration files..."
 ynh_config_add --template="config.ini.php" --destination="$install_dir/data/config.ini.php"
 
 # Load initial SQL into the new database
-ynh_config_add --template="sql/webtrees.sql" --destination="$install_dir/webtrees.sql"
-ynh_config_add --template="sql/admin.sql" --destination="$install_dir/admin.sql"
+#ynh_config_add --template="sql/webtrees.sql" --destination="$install_dir/webtrees.sql"
+#ynh_config_add --template="sql/admin.sql" --destination="$install_dir/admin.sql"
 
-ynh_mysql_db_shell < "$install_dir/webtrees.sql"
-ynh_mysql_db_shell < "$install_dir/admin.sql"
+#ynh_mysql_db_shell < "$install_dir/webtrees.sql"
+#ynh_mysql_db_shell < "$install_dir/admin.sql"
 
-ynh_safe_rm "$install_dir/webtrees.sql"
-ynh_safe_rm "$install_dir/admin.sql"
+#ynh_safe_rm "$install_dir/webtrees.sql"
+#ynh_safe_rm "$install_dir/admin.sql"
 
 #=================================================
 # SYSTEM CONFIGURATION
