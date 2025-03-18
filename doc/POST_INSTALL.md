@@ -1,5 +1,5 @@
-Your credentials for the admin panel are:
+Your credentials for the database are:
 
-dbuser __DB_USER__
-dbpass __DB_PWD__
-dbname __DB_NAME__
+Database user: __DB_USER__
+Database passeword: __DB_PWD__
+Database name: __DB_NAME__
