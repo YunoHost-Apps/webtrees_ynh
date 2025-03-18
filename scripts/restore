@@ -6,7 +6,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 # RESTORE THE APP MAIN DIR
 #=================================================
-ynh_script_progression "Restoring $app main directory..."
+ynh_script_progression "Restoring the app main directory..."
 
 ynh_restore "$install_dir"
 
@@ -18,20 +18,20 @@ ynh_script_progression "Restoring the MySQL database..."
 ynh_mysql_db_shell < ./db.sql
 
 #=================================================
-# RESTORE THE PHP-FPM CONFIGURATION
+# RESTORE SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression "Restoring the PHP-FPM configuration..."
+ynh_script_progression "Restoring system configurations related to $app..."
 
 ynh_restore "/etc/php/$php_version/fpm/pool.d/$app.conf"
 
 ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 
 #=================================================
-# RELOAD NGINX AND PHP-FPM
+# RELOAD NGINX AND PHP-FPM OR THE APP SERVICE
 #=================================================
-ynh_script_progression "Reloading NGINX web server and PHP-FPM..."
+ynh_script_progression "Reloading NGINX web server and $app's service..."
 
-ynh_systemctl --service="php${php_version}-fpm" --action=reload
+ynh_systemctl --service="php$php_version-fpm" --action=reload
 
 ynh_systemctl --service=nginx --action=reload
 
