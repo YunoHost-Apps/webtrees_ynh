@@ -1,16 +1,6 @@
 #!/bin/bash
 
-source _common.sh
 source /usr/share/yunohost/helpers
-
-#=================================================
-# ENSURE DOWNWARD COMPATIBILITY
-#=================================================
-ynh_script_progression "Ensuring downward compatibility..."
-
-ynh_app_setting_set_default --key=admin_username --value="${username:-}"
-ynh_app_setting_set_default --key=admin_name --value="${name:-}"
-ynh_app_setting_set_default --key=admin_email --value="${email:-}"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -26,9 +16,9 @@ chmod -R 700 "$install_dir/data"
 #=================================================
 ynh_script_progression "Upgrading system configurations related to $app..."
 
-ynh_config_add_nginx
-
 ynh_config_add_phpfpm
+
+ynh_config_add_nginx
 
 #=================================================
 # END OF SCRIPT

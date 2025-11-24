@@ -19,7 +19,7 @@ admindoc = "https://wiki.webtrees.net"
 code = "https://github.com/fisharebest/webtrees"
 
 [integration]
-yunohost = ">= 12.0.9"
+yunohost = ">= 12.1.17"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = true
@@ -38,24 +38,6 @@ ram.runtime = "50M"
     [install.path]
     type = "path"
     default = "/webtrees"
-
-    [install.admin_username]
-    ask.en = "Choose an admin username (Not a LDAP User)"
-    ask.fr = "Choisissez un nom d'utilisateur pour l'administrateur de Webtrees (ne doit pas être un utilisateur YunoHost existant)"
-    type = "string"
-    example = "john"
-
-    [install.admin_name]
-    ask.en = "Name of the user (Not a LDAP User)"
-    ask.fr = "Nom de cet utilisateur"
-    type = "string"
-    example = "john doe"
-
-    [install.admin_email]
-    ask.en = "Admin email (All the new registration will be sent on this email)"
-    ask.fr = "Adresse email de l'administrateur (Toutes les nouvelles inscriptions seront envoyées à cette adresse)"
-    type = "string"
-    example = "admin@example.com"
 
     [install.init_main_permission]
     type = "group"
@@ -79,13 +61,13 @@ ram.runtime = "50M"
     [resources.apt]
     packages = [
         "mariadb-server",
-        "php8.3-mbstring",
-        "php8.3-mysql",
-        "php8.3-zip",
-        "php8.3-gd",
-        "php8.3-xml",
-        "php8.3-curl",
-        "php8.3-intl",
+        "php8.4-mbstring",
+        "php8.4-mysql",
+        "php8.4-zip",
+        "php8.4-gd",
+        "php8.4-xml",
+        "php8.4-curl",
+        "php8.4-intl",
         "mailutils",
     ]
 
