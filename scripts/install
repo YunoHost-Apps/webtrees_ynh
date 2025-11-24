@@ -1,16 +1,6 @@
 #!/bin/bash
 
-source _common.sh
 source /usr/share/yunohost/helpers
-
-#=================================================
-# INITIALIZE AND STORE SETTINGS
-#=================================================
-
-admin_password=$(ynh_string_random --length=24)
-admin_password_hashed=$(mkpasswd -m md5crypt --stdin <<< "$admin_password")
-
-ynh_app_setting_set --key="admin_password" --value="$admin_password"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -19,33 +9,16 @@ ynh_script_progression "Setting up source files..."
 
 ynh_setup_source --dest_dir="$install_dir"
 
-chmod -R 700 "$install_dir/data"
-
-#=================================================
-# APP INITIAL CONFIGURATION
-#=================================================
-ynh_script_progression "Adding $app's configuration files..."
-
-ynh_config_add --template="config.ini.php" --destination="$install_dir/data/config.ini.php"
-
-# Load initial SQL into the new database
-ynh_config_add --template="sql/webtrees.sql" --destination="$install_dir/webtrees.sql"
-ynh_config_add --template="sql/admin.sql" --destination="$install_dir/admin.sql"
-
-ynh_mysql_db_shell < "$install_dir/webtrees.sql"
-ynh_mysql_db_shell < "$install_dir/admin.sql"
-
-ynh_safe_rm "$install_dir/webtrees.sql"
-ynh_safe_rm "$install_dir/admin.sql"
-
 #=================================================
 # SYSTEM CONFIGURATION
 #=================================================
 ynh_script_progression "Adding system configurations related to $app..."
 
-ynh_config_add_nginx
-
+# Create a PHP-FPM config (with conf/extra_php-fpm.conf being appended to it)
 ynh_config_add_phpfpm
+
+# Create a dedicated NGINX config using the conf/nginx.conf template
+ynh_config_add_nginx
 
 #=================================================
 # END OF SCRIPT
