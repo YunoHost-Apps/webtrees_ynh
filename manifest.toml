@@ -7,7 +7,7 @@ name = "Webtrees"
 description.en = "Web-based genealogy application"
 description.fr = "Logiciel libre de généalogie en ligne"
 
-version = "2.2.4~ynh1"
+version = "2.2.5~ynh1"
 
 maintainers = []
 
@@ -19,7 +19,7 @@ admindoc = "https://wiki.webtrees.net"
 code = "https://github.com/fisharebest/webtrees"
 
 [integration]
-yunohost = ">= 12.1.17"
+yunohost = ">= 12.1.38"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = true
@@ -45,8 +45,8 @@ ram.runtime = "50M"
 
 [resources]
         [resources.sources.main]
-        url = "https://github.com/fisharebest/webtrees/releases/download/2.2.4/webtrees-2.2.4.zip"
-        sha256 = "dd42701d1c6b751cae426ed318c80c30710aeca4fb3c7157bbb75bdbe0a4db45"
+        url = "https://github.com/fisharebest/webtrees/releases/download/2.2.5/webtrees-2.2.5.zip"
+        sha256 = "82633eba238d57f2436be22ee097352621e2f0c94be430cb36a83ab5fca31f1d"
         autoupdate.strategy = "latest_github_release"
         autoupdate.asset = ".*.zip"
 
