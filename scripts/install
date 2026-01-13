@@ -21,6 +21,13 @@ ynh_config_add_phpfpm
 ynh_config_add_nginx
 
 #=================================================
+# APP INITIAL CONFIGURATION
+#=================================================
+ynh_script_progression "Adding $app's configuration files..."
+
+ynh_config_add --template="config.ini.php" --destination="$install_dir/data/config.ini.php"
+
+#=================================================
 # END OF SCRIPT
 #=================================================
 
